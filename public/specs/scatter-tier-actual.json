@@ -1,0 +1,148 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Advertised tier speed vs actual busy hour speed, coloured by technology, MBA 2025.",
+  "width": "container",
+  "height": 380,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {"x": 10,   "y": 10},
+          {"x": 25,   "y": 25},
+          {"x": 50,   "y": 50},
+          {"x": 100,  "y": 100},
+          {"x": 250,  "y": 250},
+          {"x": 500,  "y": 500},
+          {"x": 1000, "y": 1000}
+        ]
+      },
+      "mark": {
+        "type": "line",
+        "color": "#888",
+        "strokeDash": [6, 4],
+        "strokeWidth": 1.5,
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"x": 600, "y": 650, "label": "Perfect delivery (y = x)"}]
+      },
+      "mark": {
+        "type": "text",
+        "angle": 38,
+        "fontSize": 10,
+        "color": "#666",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "url": "../data/mba-scatter.json"
+      },
+      "mark": {
+        "type": "point",
+        "opacity": 0.35,
+        "size": 40,
+        "filled": true
+      },
+      "encoding": {
+        "x": {
+          "field": "tier_mbps",
+          "type": "quantitative",
+          "title": "Advertised Tier Speed (Mbps)",
+          "scale": {
+            "type": "log",
+            "base": 10,
+            "nice": true
+          }
+        },
+        "y": {
+          "field": "actual_mbps",
+          "type": "quantitative",
+          "title": "Actual Busy Hour Speed (Mbps)",
+          "scale": {
+            "type": "log",
+            "base": 10,
+            "nice": true
+          }
+        },
+        "color": {
+          "field": "technology",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fibre to the Premises",
+              "Hybrid Fibre Coaxial",
+              "Fibre to the Curb",
+              "Fibre to the Node",
+              "Fixed Wireless",
+              "Satellite"
+            ],
+            "range": [
+              "#1565c0",
+              "#1976d2",
+              "#42a5f5",
+              "#78909c",
+              "#f57c00",
+              "#bf360c"
+            ]
+          },
+          "legend": {
+            "title": "Technology",
+            "orient": "bottom-right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "technology",
+            "type": "nominal",
+            "title": "Technology"
+          },
+          {
+            "field": "tier_label",
+            "type": "nominal",
+            "title": "Plan tier"
+          },
+          {
+            "field": "tier_mbps",
+            "type": "quantitative",
+            "title": "Advertised (Mbps)"
+          },
+          {
+            "field": "actual_mbps",
+            "type": "quantitative",
+            "title": "Actual (Mbps)",
+            "format": ".1f"
+          },
+          {
+            "field": "underperforming",
+            "type": "nominal",
+            "title": "Underperforming?"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

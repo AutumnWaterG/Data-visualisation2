@@ -1,0 +1,48 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Average NBN download speed by state — ACCC Measuring Broadband Australia Report 32, April 2026",
+  "data": {
+    "values": [
+      { "state": "ACT", "speed": 72.4, "label": "Australian Capital Territory" },
+      { "state": "VIC", "speed": 65.1, "label": "Victoria" },
+      { "state": "NSW", "speed": 62.3, "label": "New South Wales" },
+      { "state": "QLD", "speed": 55.8, "label": "Queensland" },
+      { "state": "WA",  "speed": 51.2, "label": "Western Australia" },
+      { "state": "SA",  "speed": 48.7, "label": "South Australia" },
+      { "state": "TAS", "speed": 44.3, "label": "Tasmania" },
+      { "state": "NT",  "speed": 35.6, "label": "Northern Territory" }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 4,
+    "cornerRadiusTopRight": 4
+  },
+  "encoding": {
+    "x": {
+      "field": "state",
+      "type": "nominal",
+      "sort": "-y",
+      "title": "State / Territory",
+      "axis": { "labelAngle": 0 }
+    },
+    "y": {
+      "field": "speed",
+      "type": "quantitative",
+      "title": "Median Download Speed (Mbps)",
+      "scale": { "zero": true }
+    },
+    "color": {
+      "field": "speed",
+      "type": "quantitative",
+      "scale": { "scheme": "blues" },
+      "legend": null
+    },
+    "tooltip": [
+      { "field": "label", "type": "nominal", "title": "State" },
+      { "field": "speed", "type": "quantitative", "title": "Median Speed (Mbps)", "format": ".1f" }
+    ]
+  },
+  "width": "container",
+  "height": 320
+}

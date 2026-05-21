@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Average download speed by state: 2021 Ookla vs 2025 ACCC MBA comparison.",
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "../data/comparison.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State / Territory",
+          "sort": [
+            "ACT",
+            "NSW",
+            "QLD",
+            "TAS",
+            "VIC",
+            "WA",
+            "NT",
+            "SA"
+          ],
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "xOffset": {
+          "field": "year",
+          "type": "nominal",
+          "sort": [
+            "2021 (Ookla)",
+            "2025 (ACCC MBA)"
+          ]
+        },
+        "y": {
+          "field": "speed",
+          "type": "quantitative",
+          "title": "Average Download Speed (Mbps)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "color": {
+          "field": "year",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "2021 (Ookla)",
+              "2025 (ACCC MBA)"
+            ],
+            "range": [
+              "#f57c00",
+              "#1565c0"
+            ]
+          },
+          "legend": {
+            "title": "Dataset",
+            "orient": "top-right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "year",
+            "type": "nominal",
+            "title": "Dataset"
+          },
+          {
+            "field": "speed",
+            "type": "quantitative",
+            "title": "Avg Speed (Mbps)",
+            "format": ".1f"
+          },
+          {
+            "field": "source",
+            "type": "nominal",
+            "title": "Source"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

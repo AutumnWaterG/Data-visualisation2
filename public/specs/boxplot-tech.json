@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Distribution of busy hour download speeds by technology, MBA Report 28.",
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "../data/mba-boxplot.json"
+  },
+  "mark": {
+    "type": "boxplot",
+    "extent": 1.5,
+    "outliers": {
+      "size": 20,
+      "opacity": 0.3
+    },
+    "median": {
+      "color": "white",
+      "strokeWidth": 2
+    },
+    "box": {
+      "size": 40
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "technology",
+      "type": "nominal",
+      "title": "Technology",
+      "sort": {
+        "field": "speed",
+        "op": "median",
+        "order": "descending"
+      },
+      "axis": {
+        "labelAngle": -20,
+        "labelLimit": 140
+      }
+    },
+    "y": {
+      "field": "speed",
+      "type": "quantitative",
+      "title": "Busy Hour Download Speed (Mbps)",
+      "scale": {
+        "zero": true
+      }
+    },
+    "color": {
+      "field": "technology",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Fibre to the Premises",
+          "Hybrid Fibre Coaxial",
+          "Fibre to the Curb",
+          "Fibre to the Node",
+          "Fixed Wireless",
+          "Satellite"
+        ],
+        "range": [
+          "#1565c0",
+          "#1976d2",
+          "#42a5f5",
+          "#78909c",
+          "#f57c00",
+          "#bf360c"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "technology",
+        "type": "nominal",
+        "title": "Technology"
+      },
+      {
+        "field": "speed",
+        "type": "quantitative",
+        "title": "Speed (Mbps)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is Your Internet Fast Enough? Australia's Broadband Divide</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Pure.css + responsive grid -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+
+  <style>
+    :root {
+      --blue-dark:   #1565c0;
+      --blue-mid:    #1976d2;
+      --blue-light:  #64b5f6;
+      --orange-dark: #e65100;
+      --orange-mid:  #f57c00;
+      --orange-light:#ffb300;
+      --bg:          #eef2f7;
+      --card:        #ffffff;
+      --text:        #1a2332;
+      --muted:       #5a6a7e;
+      --border:      #d0daea;
+      --r:           12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────── */
+    .site-header {
+      background: linear-gradient(140deg, #0d2757 0%, #1565c0 55%, #0d47a1 100%);
+      color: #fff;
+      padding: 64px 24px 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg, transparent, transparent 40px,
+        rgba(255,255,255,0.025) 40px, rgba(255,255,255,0.025) 41px
+      );
+      pointer-events: none;
+    }
+    .site-header h1 {
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 0 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .site-header h1 .accent { color: var(--orange-light); }
+    .site-header .sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 400;
+      opacity: .85;
+      margin: 0 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .site-header .byline {
+      font-size: .85rem;
+      opacity: .65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Layout wrapper ──────────────────────────────────────────── */
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Intro callout ───────────────────────────────────────────── */
+    .intro-box {
+      background: var(--card);
+      border-left: 5px solid var(--orange-mid);
+      border-radius: var(--r);
+      padding: 26px 32px;
+      margin: 40px 0 0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #2c3e50;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    /* ── Part headers ────────────────────────────────────────────── */
+    .part-header { margin: 56px 0 0; }
+    .part-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--orange-mid);
+      margin-bottom: 4px;
+    }
+    .part-header h2 {
+      font-size: clamp(1.35rem, 3vw, 1.95rem);
+      font-weight: 800;
+      color: var(--blue-dark);
+      margin: 0 0 4px;
+      letter-spacing: -0.02em;
+      border-bottom: 3px solid var(--blue-light);
+      padding-bottom: 12px;
+    }
+
+    /* ── Chart cards ─────────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--r);
+      padding: 28px 32px 22px;
+      margin-top: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 18px rgba(0,0,0,.04);
+    }
+
+    /* ── Narrative column ────────────────────────────────────────── */
+    .narr {
+      padding-right: 32px;
+    }
+    .narr h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin: 0 0 10px;
+    }
+    .narr p {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.78;
+      margin: 0 0 14px;
+    }
+    .callout {
+      background: linear-gradient(135deg, #e3f2fd 0%, #fff8e1 100%);
+      border-radius: 8px;
+      padding: 13px 16px;
+      margin-top: 4px;
+    }
+    .callout strong {
+      display: block;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--orange-dark);
+      line-height: 1.15;
+    }
+    .callout span {
+      font-size: .82rem;
+      color: #555;
+    }
+
+    /* Full-width chart header (for cards without a narrative column) */
+    .card-head h3 { font-size: 1.05rem; font-weight: 700; color: var(--blue-dark); margin: 0 0 6px; }
+    .card-head p  { color: var(--muted); font-size: .92rem; line-height: 1.78; max-width: 780px; margin: 0 0 18px; }
+
+    /* ── Source tags ─────────────────────────────────────────────── */
+    .src {
+      display: block;
+      font-size: .74rem;
+      color: #9aaabb;
+      margin-top: 8px;
+    }
+
+    /* ── Vega container ──────────────────────────────────────────── */
+    .vc { width: 100%; }
+    .vega-embed summary { display: none !important; }
+    .vega-embed .vg-actions { display: none !important; }
+
+    /* ── Responsive tweaks ───────────────────────────────────────── */
+    @media (max-width: 64em) {
+      .narr { padding-right: 0; padding-bottom: 20px; }
+      .card { padding: 20px 18px 16px; }
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .site-footer {
+      background: #111e30;
+      color: #8a9baa;
+      padding: 52px 24px;
+      margin-top: 72px;
+      font-size: .86rem;
+      line-height: 1.85;
+    }
+    .site-footer h4 {
+      color: #e0eaf5;
+      font-weight: 700;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin: 0 0 8px;
+    }
+    .site-footer a { color: var(--blue-light); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer hr { border: none; border-top: 1px solid #233044; margin: 28px 0; }
+  </style>
+</head>
+<body>
+
+<!-- React mounts the intro overlay here. Position-fixed so it has no layout impact. -->
+<div id="root"></div>
+
+<!-- ═══ HEADER ═════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <h1>Is Your Internet <span class="accent">Fast Enough?</span></h1>
+  <p class="sub">A Look at Australia's Broadband Divide</p>
+  <p class="byline">FIT2179 Data Visualisation 2 &nbsp;&middot;&nbsp; Monash University &nbsp;&middot;&nbsp; May 2026</p>
+</header>
+
+<!-- ═══ CONTENT ════════════════════════════════════════════════════════ -->
+<div class="wrap">
+
+  <!-- Introduction -->
+  <div class="intro-box">
+    Australia's National Broadband Network (NBN) promised fast, reliable internet for all Australians &mdash; but is everyone actually getting the same experience?
+    This page explores <strong>82,000+ Ookla Speedtest measurements from 2021 Q3</strong> alongside <strong>1,787 monitored household services from the ACCC's March 2025 Measuring Broadband Australia report</strong>.
+    Together they reveal where speeds are fast, where they lag behind, which technologies are to blame, and whether Australian households are getting what they pay for.
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       PART 1: WHERE IS FAST AND WHERE IS SLOW?
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 1</div>
+    <h2>Where is Fast and Where is Slow?</h2>
+  </div>
+
+  <!-- Chart 1: Choropleth -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>A patchwork of speeds across states</h3>
+        <p>Average fixed broadband download speeds varied noticeably across Australian states in 2021. The <strong>ACT led the country</strong> at around 61&nbsp;Mbps, while <strong>Western Australia trailed</strong> at under 49&nbsp;Mbps &mdash; a gap of over 12&nbsp;Mbps. The ACT's advantage reflects its higher concentration of FTTP connections and tech-savvy residents who run Speedtest more often on fast connections.</p>
+        <div class="callout">
+          <strong>61 Mbps</strong>
+          <span>ACT led all states in 2021 Ookla average</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart1" class="vc"></div>
+        <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 2: Grid heatmap -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Speed follows population density</h3>
+        <p>Zooming in to a 0.5&deg; grid reveals how strongly speed tracks population. <strong>Blue cells</strong> mark the fastest areas, clustering tightly around Sydney, Melbourne, Brisbane, and Perth. <strong>Orange and red</strong> highlight slower regions &mdash; rural coastal areas and the interior. The vast grey interior reflects limited Speedtest coverage in remote zones, not zero broadband.</p>
+        <div class="callout">
+          <strong>City vs Country</strong>
+          <span>Urban tiles often exceed 100&nbsp;Mbps; remote rural tiles average below 30&nbsp;Mbps</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart2" class="vc"></div>
+        <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       PART 2: WHY IS IT SLOW?
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 2</div>
+    <h2>Why is it Slow? Technology and Geography</h2>
+  </div>
+
+  <!-- Chart 3: Bar by state + geography -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Urban areas lead in every single state</h3>
+        <p>By 2025, average busy-hour speeds had jumped dramatically as more Australians upgraded to higher-tier plans (250&nbsp;Mbps, 500&nbsp;Mbps, 1&nbsp;Gbps). But within every state, <strong>urban residents consistently outperform their rural counterparts</strong> &mdash; often by a factor of two to four. Victoria's urban panel averaged over 300&nbsp;Mbps, while Tasmania's minor-rural services managed just 64&nbsp;Mbps.</p>
+        <p>The dashed line marks the national average across all panel services (~252&nbsp;Mbps). Almost no rural or minor-rural areas reach this benchmark.</p>
+        <div class="callout">
+          <strong>4.6&times; gap</strong>
+          <span>VIC urban (319 Mbps) vs TAS minor rural (64 Mbps)</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart3" class="vc"></div>
+        <span class="src">Source: ACCC Measuring Broadband Australia Report 28, March 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 4: Bar by geography + technology -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>FTTP transforms urban speeds; rural areas rely on older tech</h3>
+        <p>The technology mix explains much of the geographic divide. <strong>Fibre to the Premises (FTTP)</strong> delivers blazing speeds in urban areas, while rural and minor-rural communities depend more on <strong>Fixed Wireless</strong> and <strong>Fibre to the Node (FTTN)</strong> &mdash; technologies with inherently lower speed ceilings set by copper wire distance.</p>
+        <p>Satellite services (Sky Muster and Starlink) serve the most remote areas but still lag far behind urban fibre &mdash; though Starlink has brought a step-change improvement over the old NBN Sky Muster satellite.</p>
+        <div class="callout">
+          <strong>FTTP vs FTTN</strong>
+          <span>Urban FTTP averages roughly 3&times; the speed of urban FTTN</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart4" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts 5 + 6: Donut + Box plot side by side -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-5-12" style="padding-right: 24px;">
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--blue-dark);margin:0 0 8px">Technology share in the monitoring panel</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">FTTN remains the most common technology in the 2025 panel &mdash; a legacy of the early NBN rollout that prioritised copper nodes over full-fibre. However, FTTP is growing rapidly as the government's fibre upgrade programme accelerates nationwide.</p>
+        <div id="chart5" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025</span>
+      </div>
+      <div class="pure-u-1 pure-u-lg-7-12" style="padding-left: 12px;">
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--blue-dark);margin:0 0 8px">Fibre pulls far ahead &mdash; and is more consistent</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">The box plot reveals not just average differences but the <em>consistency</em> of each technology. FTTP services cluster tightly at high speeds. FTTN shows a wide spread &mdash; some services barely reach 20&nbsp;Mbps, others hit 100&nbsp;Mbps, depending on copper line distance. Satellite has the widest spread of all, driven by weather, congestion, and orbital differences between Sky Muster and Starlink.</p>
+        <div id="chart6" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 8: Stacked bar by RSP -->
+  <div class="card">
+    <div class="card-head">
+      <h3>Which providers use which technology?</h3>
+      <p>Not all internet providers offer the same technology mix &mdash; their customer bases reflect where they operate and who they target. <strong>Aussie Broadband and Leaptel</strong> have a high FTTP share, attracting customers who've upgraded to full-fibre. <strong>Telstra</strong> covers the broadest mix, reflecting its nationwide reach. <strong>Starlink</strong> is exclusively satellite &mdash; the only viable option for many remote Australians with no fixed-line NBN access.</p>
+    </div>
+    <div id="chart8" class="vc"></div>
+    <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       PART 3: ARE WE GETTING WHAT WE PAID FOR?
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 3</div>
+    <h2>Are We Getting What We Paid For?</h2>
+  </div>
+
+  <!-- Chart 7: Scatter plot -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Most services deliver &mdash; but not all</h3>
+        <p>Each dot compares a service's <em>advertised plan tier</em> (x-axis) against its <em>actual busy-hour speed</em> (y-axis). Points along the dashed diagonal represent <strong>perfect delivery</strong>. Points below the line are underperforming. FTTP and HFC generally cluster close to the diagonal. FTTN and Fixed Wireless show more scatter, frequently falling short on higher-tier plans &mdash; a copper ceiling that no amount of plan upgrade can overcome.</p>
+        <div class="callout">
+          <strong>Log scale</strong>
+          <span>Both axes use a log scale to span from 12&nbsp;Mbps entry plans to 1&nbsp;Gbps services</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart7" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 9: Underperforming bar -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Older technologies fail customers most often</h3>
+        <p>The ACCC classifies a service as "underperforming" when it consistently delivers less than 75% of its advertised speed during busy hours. <strong>Fibre to the Node (FTTN)</strong> has the highest underperformance rate, reflecting physical limits of copper phone lines. <strong>FTTP and HFC</strong> rarely underperform because fibre delivers consistent speeds regardless of distance from the exchange or node.</p>
+        <div class="callout">
+          <strong>FTTN</strong>
+          <span>Most likely to underperform among all fixed NBN technologies</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart9" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 10: 2021 vs 2025 comparison -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Australia's broadband speeds have soared since 2021</h3>
+        <p>Comparing Ookla's 2021 crowd-sourced measurements with the ACCC's 2025 monitored panel reveals a striking shift. Average speeds have roughly <strong>quadrupled</strong> across most states, driven by uptake of higher-tier plans and the ongoing FTTP upgrade rollout.</p>
+        <p><em>Caveat:</em> the datasets measure different things &mdash; Ookla captures all Speedtest users, while the ACCC panel skews toward monitored broadband subscribers. Both confirm the upward trend, though absolute numbers differ.</p>
+        <div class="callout">
+          <strong>~4&times; faster</strong>
+          <span>State averages grew from ~55&nbsp;Mbps (2021) to ~240&nbsp;Mbps (2025)</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart10" class="vc"></div>
+        <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 (CC BY 4.0) &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .wrap -->
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2" style="padding-right:32px">
+        <h4>About this visualisation</h4>
+        <p>
+          <strong style="color:#e0eaf5">Author:</strong> Zhongfan Dong &nbsp;&middot;&nbsp;
+          <strong style="color:#e0eaf5">Student ID:</strong> 34596968<br>
+          FIT2179 Data Visualisation 2, Monash University<br>
+          Published: May 2026
+        </p>
+        <p>
+          Built with <a href="https://vega.github.io/vega-lite/" target="_blank">Vega-Lite v5</a>,
+          <a href="https://vega.github.io/vega-embed/" target="_blank">vega-embed</a>, and
+          <a href="https://purecss.io" target="_blank">Pure.css</a>.
+          All chart specifications are in <code>/specs/</code>;
+          processed data files are in <code>/data/</code>.
+        </p>
+        <hr>
+        <h4>AI tools acknowledgement</h4>
+        <p>Claude AI (Anthropic) assisted with Python data-aggregation scripts, Vega-Lite specification design, and page HTML/CSS layout. All analytical judgements, chart selection, narrative text, and design decisions were made by the author.</p>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h4>Data sources</h4>
+        <p>
+          <a href="https://registry.opendata.aws/speedtest-global-performance/" target="_blank">Ookla Speedtest Open Data</a>
+          &mdash; Fixed broadband, Australia, Q3 2021. Licensed CC BY 4.0.<br><br>
+          <a href="https://www.accc.gov.au/consumers/internet-and-phone/broadband-performance-program" target="_blank">ACCC Measuring Broadband Australia</a>
+          &mdash; Report 28, March 2025. Licensed CC BY 2.5 AU.<br><br>
+          <a href="https://github.com/rowanhogan/australian-states" target="_blank">Australian States GeoJSON</a>
+          &mdash; rowanhogan, GitHub. Used for state boundary maps.<br><br>
+          <a href="https://fonts.google.com/specimen/Inter" target="_blank">Inter typeface</a>
+          &mdash; Rasmus Andersson, Google Fonts (SIL Open Font Licence).
+        </p>
+        <h4 style="margin-top:20px">Licence</h4>
+        <p>Visualisation code and narrative text &copy; 2026 [Your Name]. Data remains under original licences above.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ VEGA CDN ════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+<script>
+  const OPT = { renderer: 'svg', actions: false };
+
+  [
+    ['#chart1',  'specs/choropleth-ookla.json'],
+    ['#chart2',  'specs/grid-heatmap.json'],
+    ['#chart3',  'specs/bar-state-speed.json'],
+    ['#chart4',  'specs/bar-geography-speed.json'],
+    ['#chart5',  'specs/donut-tech.json'],
+    ['#chart6',  'specs/boxplot-tech.json'],
+    ['#chart7',  'specs/scatter-tier-actual.json'],
+    ['#chart8',  'specs/stacked-rsp-tech.json'],
+    ['#chart9',  'specs/bar-underperform.json'],
+    ['#chart10', 'specs/comparison-state.json'],
+  ].forEach(([sel, url]) => {
+    vegaEmbed(sel, url, OPT).catch(err => {
+      const el = document.querySelector(sel);
+      if (el) el.innerHTML = `<p style="color:#c00;padding:16px;font-size:.85rem">
+        Chart failed to load (${url}): ${err.message}</p>`;
+      console.error(sel, err);
+    });
+  });
+</script>
+
+<!-- React entry point (intro overlay only — Vite bundles this) -->
+<script type="module" src="/src/main.jsx"></script>
+
+</body>
+</html>

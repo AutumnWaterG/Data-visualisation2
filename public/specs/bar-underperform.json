@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Percentage of services classified as underperforming by technology type, MBA Report 28.",
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "../data/mba-underperform.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 4,
+        "cornerRadiusTopRight": 4
+      },
+      "encoding": {
+        "x": {
+          "field": "technology",
+          "type": "nominal",
+          "title": "Technology",
+          "sort": "-y",
+          "axis": {
+            "labelAngle": -20,
+            "labelLimit": 140
+          }
+        },
+        "y": {
+          "field": "pct_underperforming",
+          "type": "quantitative",
+          "title": "Underperforming Services (%)",
+          "scale": {
+            "zero": true,
+            "domain": [
+              0,
+              100
+            ]
+          }
+        },
+        "color": {
+          "field": "pct_underperforming",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              20,
+              50,
+              100
+            ],
+            "range": [
+              "#1565c0",
+              "#f57c00",
+              "#e53935",
+              "#b71c1c"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "technology",
+            "type": "nominal",
+            "title": "Technology"
+          },
+          {
+            "field": "pct_underperforming",
+            "type": "quantitative",
+            "title": "Underperforming (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "underperforming",
+            "type": "quantitative",
+            "title": "Count"
+          },
+          {
+            "field": "total",
+            "type": "quantitative",
+            "title": "Panel total"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -4,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "technology",
+          "type": "nominal",
+          "sort": "-y"
+        },
+        "y": {
+          "field": "pct_underperforming",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "pct_underperforming",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.pct_underperforming > 40",
+            "value": "#b71c1c"
+          },
+          "value": "#333"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

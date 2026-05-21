@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Average fixed broadband download speed by Australian state, Ookla 2021 Q3.",
+  "width": "container",
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.STATE_NAME",
+          "as": "state_name_geo"
+        },
+        {
+          "lookup": "state_name_geo",
+          "from": {
+            "data": {
+              "url": "../data/ookla-state.json"
+            },
+            "key": "state_name",
+            "fields": [
+              "avg_d_mbps",
+              "state"
+            ]
+          },
+          "default": null
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "color": {
+          "field": "avg_d_mbps",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues",
+            "domain": [
+              45,
+              65
+            ],
+            "nice": true
+          },
+          "legend": {
+            "title": "Avg Speed (Mbps)",
+            "orient": "bottom-right",
+            "gradientLength": 100
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_name_geo",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "avg_d_mbps",
+            "type": "quantitative",
+            "title": "Avg Download (Mbps)",
+            "format": ".1f"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "Abbrev."
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent"
+  }
+}

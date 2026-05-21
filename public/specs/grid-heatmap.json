@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ookla 2021 Q3 fixed broadband speeds binned to 0.5? grid tiles.",
+  "width": "container",
+  "height": 380,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e9ecef",
+        "stroke": "#adb5bd",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "../data/ookla-grid.json"
+      },
+      "transform": [
+        { "calculate": "datum.lon - 0.25", "as": "lon_w" },
+        { "calculate": "datum.lon + 0.25", "as": "lon_e" },
+        { "calculate": "datum.lat - 0.25", "as": "lat_s" },
+        { "calculate": "datum.lat + 0.25", "as": "lat_n" }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon_w",
+          "type": "quantitative"
+        },
+        "longitude2": { "field": "lon_e" },
+        "latitude": {
+          "field": "lat_n",
+          "type": "quantitative"
+        },
+        "latitude2": { "field": "lat_s" },
+        "color": {
+          "field": "avg_d_mbps",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              50,
+              150,
+              400
+            ],
+            "range": [
+              "#bf360c",
+              "#f57c00",
+              "#1976d2",
+              "#1565c0"
+            ]
+          },
+          "legend": {
+            "title": "Avg Speed (Mbps)",
+            "orient": "bottom-right",
+            "gradientLength": 110
+          }
+        },
+        "tooltip": [
+          {
+            "field": "lat",
+            "type": "quantitative",
+            "title": "Latitude",
+            "format": ".1f"
+          },
+          {
+            "field": "lon",
+            "type": "quantitative",
+            "title": "Longitude",
+            "format": ".1f"
+          },
+          {
+            "field": "avg_d_mbps",
+            "type": "quantitative",
+            "title": "Avg Download (Mbps)",
+            "format": ".1f"
+          },
+          {
+            "field": "n",
+            "type": "quantitative",
+            "title": "Tiles in cell"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent"
+  }
+}

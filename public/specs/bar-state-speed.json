@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Busy hour trimmed mean download speed by state and geography type, MBA Report 28, 2025.",
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "../data/mba-state.json"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State / Territory",
+          "sort": ["ACT", "NSW", "QLD", "TAS", "VIC", "WA"],
+          "axis": {
+            "labelAngle": 0
+          }
+        },
+        "xOffset": {
+          "field": "geography",
+          "type": "nominal",
+          "scale": {
+            "paddingInner": 0.1
+          }
+        },
+        "y": {
+          "field": "speed",
+          "type": "quantitative",
+          "title": "Busy Hour Download Speed (Mbps)",
+          "scale": {
+            "zero": true
+          }
+        },
+        "color": {
+          "field": "geography",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Urban",
+              "Minor Rural",
+              "Rural"
+            ],
+            "range": [
+              "#1565c0",
+              "#43a047",
+              "#f57c00"
+            ]
+          },
+          "legend": {
+            "title": "Geography",
+            "orient": "top-right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "geography",
+            "type": "nominal",
+            "title": "Geography"
+          },
+          {
+            "field": "speed",
+            "type": "quantitative",
+            "title": "Speed (Mbps)",
+            "format": ".1f"
+          },
+          {
+            "field": "n",
+            "type": "quantitative",
+            "title": "Panel size"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#333",
+        "strokeDash": [
+          6,
+          3
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.7
+      },
+      "data": {
+        "values": [
+          {
+            "national_avg": 252.0
+          }
+        ]
+      },
+      "encoding": {
+        "y": {
+          "field": "national_avg",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "dy": -6,
+        "color": "#333",
+        "fontSize": 11,
+        "fontStyle": "italic"
+      },
+      "data": {
+        "values": [
+          {
+            "national_avg": 252.0,
+            "label": "National avg ~252 Mbps"
+          }
+        ]
+      },
+      "encoding": {
+        "x": {
+          "value": 0
+        },
+        "y": {
+          "field": "national_avg",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}
