@@ -1,0 +1,89 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart showing how Australian state speed rankings changed between Ookla 2021 Q3 and ACCC MBA 2025.",
+  "width": "container",
+  "height": 300,
+  "data": {"url": "data/comparison.json"},
+  "transform": [
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "speed", "order": "descending"}],
+      "groupby": ["year"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"],
+          "title": null,
+          "axis": {"labelFontSize": 12, "labelFontWeight": "bold", "tickSize": 0}
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Speed rank  (1 = fastest)",
+          "scale": {"domain": [1, 8], "reverse": true},
+          "axis": {"tickMinStep": 1, "values": [1,2,3,4,5,6,7,8]}
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "legend": null
+        },
+        "detail": {"field": "state"},
+        "tooltip": [
+          {"field": "state",  "type": "nominal",      "title": "State"},
+          {"field": "year",   "type": "nominal",       "title": "Dataset"},
+          {"field": "speed",  "type": "quantitative",  "title": "Avg speed (Mbps)", "format": ".0f"},
+          {"field": "rank",   "type": "quantitative",  "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]
+        },
+        "y": {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "color": {"field": "state", "type": "nominal", "legend": null},
+        "tooltip": [
+          {"field": "state",  "type": "nominal",     "title": "State"},
+          {"field": "year",   "type": "nominal",      "title": "Dataset"},
+          {"field": "speed",  "type": "quantitative", "title": "Avg speed (Mbps)", "format": ".0f"},
+          {"field": "rank",   "type": "quantitative", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === '2021 (Ookla)'"}],
+      "mark": {"type": "text", "align": "right", "dx": -10, "fontSize": 11, "fontWeight": 700},
+      "encoding": {
+        "x":    {"field": "year", "type": "ordinal", "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]},
+        "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "text": {"field": "state", "type": "nominal"},
+        "color": {"field": "state", "type": "nominal", "legend": null}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === '2025 (ACCC MBA)'"}],
+      "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 11, "fontWeight": 700},
+      "encoding": {
+        "x":    {"field": "year", "type": "ordinal", "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]},
+        "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "text": {"field": "state", "type": "nominal"},
+        "color": {"field": "state", "type": "nominal", "legend": null}
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waffle chart: each square represents 1% of the 1,787 ACCC MBA monitored services, coloured by NBN technology type.",
+  "width": 320,
+  "height": 320,
+  "data": {"sequence": {"start": 1, "stop": 101, "as": "i"}},
+  "transform": [
+    {"calculate": "ceil(datum.i / 10)", "as": "row"},
+    {"calculate": "((datum.i - 1) % 10) + 1", "as": "col"},
+    {
+      "calculate": "datum.i <= 45 ? 'Fibre to the Premises (45%)' : datum.i <= 66 ? 'Hybrid Fibre Coaxial (21%)' : datum.i <= 84 ? 'Fibre to the Node (18%)' : datum.i <= 91 ? 'Fixed Wireless (7%)' : datum.i <= 97 ? 'Satellite (6%)' : 'Fibre to the Curb (3%)'",
+      "as": "technology"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "white",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null,
+      "title": null
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "title": null,
+      "sort": "descending"
+    },
+    "color": {
+      "field": "technology",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Fibre to the Premises (45%)",
+          "Hybrid Fibre Coaxial (21%)",
+          "Fibre to the Node (18%)",
+          "Fixed Wireless (7%)",
+          "Satellite (6%)",
+          "Fibre to the Curb (3%)"
+        ],
+        "range": ["#1565c0", "#1976d2", "#78909c", "#f57c00", "#bf360c", "#42a5f5"]
+      },
+      "legend": {
+        "title": "Technology (share)",
+        "orient": "bottom",
+        "columns": 2,
+        "labelFontSize": 10
+      }
+    },
+    "tooltip": [
+      {"field": "technology", "type": "nominal", "title": "Technology"}
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}

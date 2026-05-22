@@ -1,0 +1,59 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map: circle size = number of Speedtest measurements per state; colour = average download speed. Ookla 2021 Q3.",
+  "width": "container",
+  "height": 400,
+  "projection": {"type": "mercator"},
+  "layer": [
+    {
+      "data": {
+        "url": "data/australian-states.json",
+        "format": {"type": "json", "property": "features"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e9ecef",
+        "stroke": "#adb5bd",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {"url": "data/ookla-points.json"},
+      "mark": {
+        "type": "circle",
+        "opacity": 0.82,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "size": {
+          "field": "n",
+          "type": "quantitative",
+          "title": "Speedtest count",
+          "scale": {"range": [200, 5000], "type": "sqrt"},
+          "legend": {
+            "orient": "bottom-right",
+            "title": "Tests",
+            "values": [1000, 5000, 10000, 20000],
+            "symbolFillColor": "#888"
+          }
+        },
+        "color": {
+          "field": "avg_d_mbps",
+          "type": "quantitative",
+          "title": "Avg speed (Mbps)",
+          "scale": {"scheme": "blues", "domain": [47, 62]},
+          "legend": {"orient": "bottom-left", "gradientLength": 110, "title": "Avg dl\n(Mbps)"}
+        },
+        "tooltip": [
+          {"field": "state_name",  "type": "nominal",      "title": "State"},
+          {"field": "avg_d_mbps", "type": "quantitative",  "title": "Avg speed (Mbps)", "format": ".1f"},
+          {"field": "n",           "type": "quantitative",  "title": "Speedtest count",  "format": ","}
+        ]
+      }
+    }
+  ],
+  "config": {"background": "transparent"}
+}

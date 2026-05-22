@@ -1,0 +1,10 @@
+[
+  {"state": "ACT", "state_name": "Australian Capital Territory", "lat": -35.47, "lon": 149.01, "avg_d_mbps": 61.04, "n": 1783},
+  {"state": "NSW", "state_name": "New South Wales",              "lat": -32.16, "lon": 147.02, "avg_d_mbps": 57.29, "n": 20199},
+  {"state": "VIC", "state_name": "Victoria",                     "lat": -37.02, "lon": 144.79, "avg_d_mbps": 56.64, "n": 23810},
+  {"state": "QLD", "state_name": "Queensland",                   "lat": -22.49, "lon": 144.42, "avg_d_mbps": 52.89, "n": 18616},
+  {"state": "NT",  "state_name": "Northern Territory",           "lat": -19.49, "lon": 133.37, "avg_d_mbps": 51.70, "n": 663},
+  {"state": "TAS", "state_name": "Tasmania",                     "lat": -42.02, "lon": 146.59, "avg_d_mbps": 50.78, "n": 2589},
+  {"state": "SA",  "state_name": "South Australia",              "lat": -30.00, "lon": 135.76, "avg_d_mbps": 50.55, "n": 6180},
+  {"state": "WA",  "state_name": "Western Australia",            "lat": -26.00, "lon": 121.00, "avg_d_mbps": 48.56, "n": 8943}
+]

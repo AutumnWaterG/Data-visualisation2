@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heat map of average busy-hour download speed by geography type and NBN technology, MBA Report 28.",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "data/mba-geography.json"},
+  "mark": {"type": "rect", "cornerRadius": 4},
+  "encoding": {
+    "x": {
+      "field": "geography",
+      "type": "nominal",
+      "title": "Geography type",
+      "sort": ["Urban", "Minor Rural", "Rural"],
+      "axis": {"labelAngle": 0, "labelFontSize": 12}
+    },
+    "y": {
+      "field": "technology",
+      "type": "nominal",
+      "title": null,
+      "sort": {"field": "speed", "op": "max", "order": "descending"},
+      "axis": {"labelFontSize": 11}
+    },
+    "color": {
+      "field": "speed",
+      "type": "quantitative",
+      "title": "Avg speed (Mbps)",
+      "scale": {"scheme": "blues", "zero": false},
+      "legend": {"orient": "right", "gradientLength": 160, "title": "Avg speed\n(Mbps)"}
+    },
+    "tooltip": [
+      {"field": "geography", "type": "nominal", "title": "Geography"},
+      {"field": "technology", "type": "nominal", "title": "Technology"},
+      {"field": "speed", "type": "quantitative", "title": "Avg speed (Mbps)", "format": ".0f"},
+      {"field": "n", "type": "quantitative", "title": "Panel services"}
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Histogram of speed achievement ratio (actual ÷ advertised) across all monitored NBN services, MBA Report 28.",
+  "width": "container",
+  "height": 300,
+  "layer": [
+    {
+      "data": {"url": "data/mba-scatter.json"},
+      "transform": [
+        {"calculate": "datum.actual_mbps / datum.tier_mbps", "as": "ratio"},
+        {"filter": "datum.ratio < 3"}
+      ],
+      "mark": {"type": "bar", "opacity": 0.85},
+      "encoding": {
+        "x": {
+          "bin": {"maxbins": 30},
+          "field": "ratio",
+          "type": "quantitative",
+          "title": "Actual ÷ Advertised Speed  (ratio)"
+        },
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of services"
+        },
+        "color": {
+          "condition": {"test": "datum['bin_maxbins_30_ratio_end'] <= 1.0", "value": "#e65100"},
+          "value": "#1565c0"
+        },
+        "tooltip": [
+          {"bin": true, "field": "ratio", "type": "quantitative", "title": "Ratio range", "format": ".2f"},
+          {"aggregate": "count", "type": "quantitative", "title": "Services"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 1.0}]},
+      "mark": {"type": "rule", "color": "#e65100", "strokeDash": [6, 3], "strokeWidth": 2},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 1.0, "label": "100% of advertised"}]},
+      "mark": {"type": "text", "align": "left", "dx": 6, "dy": -8, "fontSize": 11, "color": "#e65100", "fontStyle": "italic"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "resolve": {"scale": {"x": "shared"}},
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}

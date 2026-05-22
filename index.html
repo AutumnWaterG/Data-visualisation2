@@ -30,6 +30,8 @@
       --r:           12px;
     }
 
+    html { scroll-behavior: smooth; }
+
     *, *::before, *::after { box-sizing: border-box; }
 
     body {
@@ -50,6 +52,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 20px rgba(21,101,192,.25);
     }
     .site-header::after {
       content: '';
@@ -96,6 +99,9 @@
     .intro-box {
       background: var(--card);
       border-left: 5px solid var(--orange-mid);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       border-radius: var(--r);
       padding: 26px 32px;
       margin: 40px 0 0;
@@ -106,32 +112,40 @@
     }
 
     /* ── Part headers ────────────────────────────────────────────── */
-    .part-header { margin: 56px 0 0; }
+    .part-header {
+      margin: 68px 0 0;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
     .part-label {
-      font-size: .75rem;
+      display: inline-block;
+      font-size: .68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--orange-mid);
-      margin-bottom: 4px;
+      letter-spacing: .14em;
+      color: var(--orange-dark);
+      background: rgba(230,81,0,.08);
+      border: 1px solid rgba(230,81,0,.22);
+      padding: 3px 10px 2px;
+      border-radius: 4px;
+      margin-bottom: 10px;
     }
     .part-header h2 {
       font-size: clamp(1.35rem, 3vw, 1.95rem);
       font-weight: 800;
       color: var(--blue-dark);
-      margin: 0 0 4px;
+      margin: 0;
       letter-spacing: -0.02em;
-      border-bottom: 3px solid var(--blue-light);
-      padding-bottom: 12px;
     }
 
     /* ── Chart cards ─────────────────────────────────────────────── */
     .card {
       background: var(--card);
       border-radius: var(--r);
-      padding: 28px 32px 22px;
+      border: 1px solid var(--border);
+      padding: 30px 36px 24px;
       margin-top: 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 18px rgba(0,0,0,.04);
+      box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 28px rgba(0,0,0,.05);
     }
 
     /* ── Narrative column ────────────────────────────────────────── */
@@ -141,8 +155,9 @@
     .narr h3 {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--blue-dark);
-      margin: 0 0 10px;
+      color: var(--text);
+      line-height: 1.4;
+      margin: 0 0 12px;
     }
     .narr p {
       color: var(--muted);
@@ -151,10 +166,11 @@
       margin: 0 0 14px;
     }
     .callout {
-      background: linear-gradient(135deg, #e3f2fd 0%, #fff8e1 100%);
-      border-radius: 8px;
+      background: #f8fafc;
+      border-left: 4px solid var(--orange-mid);
+      border-radius: 0 8px 8px 0;
       padding: 13px 16px;
-      margin-top: 4px;
+      margin-top: 16px;
     }
     .callout strong {
       display: block;
@@ -165,19 +181,20 @@
     }
     .callout span {
       font-size: .82rem;
-      color: #555;
+      color: var(--muted);
     }
 
     /* Full-width chart header (for cards without a narrative column) */
-    .card-head h3 { font-size: 1.05rem; font-weight: 700; color: var(--blue-dark); margin: 0 0 6px; }
+    .card-head h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.4; margin: 0 0 6px; }
     .card-head p  { color: var(--muted); font-size: .92rem; line-height: 1.78; max-width: 780px; margin: 0 0 18px; }
 
     /* ── Source tags ─────────────────────────────────────────────── */
     .src {
       display: block;
       font-size: .74rem;
+      font-style: italic;
       color: #9aaabb;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     /* ── Vega container ──────────────────────────────────────────── */
@@ -188,7 +205,7 @@
     /* ── Responsive tweaks ───────────────────────────────────────── */
     @media (max-width: 64em) {
       .narr { padding-right: 0; padding-bottom: 20px; }
-      .card { padding: 20px 18px 16px; }
+      .card { padding: 22px 20px 18px; }
     }
 
     /* ── Footer ──────────────────────────────────────────────────── */
@@ -416,6 +433,131 @@
     </div>
   </div>
 
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       PART 4: A DEEPER LOOK AT THE DATA
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 4</div>
+    <h2>A Deeper Look at the Data</h2>
+  </div>
+
+  <!-- Chart 11: Histogram — speed achievement ratio -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Most services hit their speed target — but a stubborn tail falls short</h3>
+        <p>This histogram shows how each monitored service's <strong>actual busy-hour speed compares to its advertised plan tier</strong>. A ratio of 1.0 (red dashed line) means perfect delivery. The tall spike just right of 1.0 shows that most FTTP and HFC services actually <em>exceed</em> their plan. The orange bars to the left reveal a persistent minority of services — mostly FTTN — that consistently under-deliver.</p>
+        <div class="callout">
+          <strong>Right-skewed</strong>
+          <span>Fibre services cluster above 1.0; copper-based FTTN drags the left tail down</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart11" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts 12 + 13: Heatmap + Waffle side by side -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-7-12" style="padding-right: 24px;">
+        <h3>The fibre–copper divide is visible at a glance</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">Each cell shows the average download speed for a geography–technology combination. <strong>Darker blue = faster</strong>. FTTP stays dark across all geographies; Satellite and FTTN are consistently pale. Rural areas gain almost nothing by upgrading from FTTN to Fixed Wireless — only full fibre moves the needle.</p>
+        <div id="chart12" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+      <div class="pure-u-1 pure-u-lg-5-12" style="padding-left: 12px;">
+        <h3>Nearly half the panel is now on fibre</h3>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">Each square = 1% of the 1,787 monitored services. <strong>FTTP now holds 45 squares</strong> — the single largest block — thanks to the government's accelerated fibre upgrade. Yet legacy technologies (FTTN&nbsp;18% + HFC&nbsp;21%) still account for nearly 40% of all connections.</p>
+        <div id="chart13" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 14: Box plot by plan tier -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Higher plan tiers deliver more — but with far greater spread</h3>
+        <p>Entry-level 25&nbsp;Mbps plans are consistent: almost everyone gets close to 25&nbsp;Mbps. But 500&nbsp;Mbps and 1&nbsp;Gbps plans show wide boxes — some households hit 900+&nbsp;Mbps while others struggle below 200&nbsp;Mbps. The spread at the top tiers reflects the mix of technologies: a 1&nbsp;Gbps FTTP service delivers; a 1&nbsp;Gbps FTTN service cannot.</p>
+        <div class="callout">
+          <strong>Top-tier plans vary wildly</strong>
+          <span>1 Gbps boxes span 200–950 Mbps because FTTN copper limits performance regardless of plan</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart14" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       PART 5: TRENDS & GEOGRAPHY
+  ══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 5</div>
+    <h2>Trends &amp; Geography</h2>
+  </div>
+
+  <!-- Chart 15: Slope graph -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Fibre over-delivers; copper under-delivers</h3>
+        <p>Each line traces one technology from its <strong>mean advertised speed</strong> to its <strong>mean actual busy-hour speed</strong>. Lines sloping <em>upward</em> mean the technology over-delivers; lines sloping <em>downward</em> mean it falls short. FTTP and HFC both rise — providers under-promise and over-deliver. FTTN and Satellite slope down, confirming systematic underperformance.</p>
+        <div class="callout">
+          <strong>FTTP &amp; HFC rise</strong>
+          <span>Fibre technologies average above their advertised tier; copper technologies fall below</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart15" class="vc"></div>
+        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 16: Bump chart -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>State speed rankings have reshuffled since 2021</h3>
+        <p>The bump chart tracks each state's <strong>speed rank</strong> (1&nbsp;= fastest) from Ookla&nbsp;2021 to ACCC&nbsp;2025. The ACT and VIC have held the top spots, but the states in the middle pack have shuffled significantly as FTTP upgrades roll out unevenly. States that adopted fibre early climbed; those still relying on copper fell behind.</p>
+        <div class="callout">
+          <strong>Lines crossing = rank change</strong>
+          <span>Crossing lines reveal which states benefited most from NBN upgrades between 2021 and 2025</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart16" class="vc"></div>
+        <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 17: Proportional symbol map -->
+  <div class="card">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-lg-1-3 narr">
+        <h3>Testing is concentrated in the south-east — and speed follows</h3>
+        <p>Each circle is centred on a state's geographic centre. <strong>Circle size</strong> shows the number of Ookla Speedtest measurements from that state in Q3 2021; <strong>colour</strong> shows average download speed (darker = faster). NSW and VIC dominate testing volume, while the <strong>ACT&nbsp;— with far fewer tests — records the fastest average</strong>, reflecting its higher share of fibre connections and tech-savvy residents.</p>
+        <div class="callout">
+          <strong>ACT leads</strong>
+          <span>Smallest circle, darkest blue: fewest tests but highest average speed at 61&nbsp;Mbps</span>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-lg-2-3">
+        <div id="chart17" class="vc"></div>
+        <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
+      </div>
+    </div>
+  </div>
+
 </div><!-- end .wrap -->
 
 <!-- ═══ FOOTER ══════════════════════════════════════════════════════════ -->
@@ -466,7 +608,28 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
 <script>
-  const OPT = { renderer: 'svg', actions: false };
+  const FONT = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
+  const OPT = {
+    renderer: 'svg',
+    actions: false,
+    config: {
+      font: FONT,
+      axis: {
+        labelFont: FONT, titleFont: FONT,
+        labelFontSize: 11, titleFontSize: 11.5, titleFontWeight: 600,
+        labelColor: '#5a6a7e', titleColor: '#1a2332',
+        gridColor: '#dde4ef', domainColor: '#c4cfde',
+        tickColor: '#c4cfde', tickSize: 4
+      },
+      legend: {
+        labelFont: FONT, titleFont: FONT,
+        labelFontSize: 11, titleFontSize: 11, titleFontWeight: 600,
+        labelColor: '#1a2332', titleColor: '#1a2332'
+      },
+      header: { labelFont: FONT, titleFont: FONT },
+      text: { font: FONT }
+    }
+  };
 
   [
     ['#chart1',  'specs/choropleth-ookla.json'],
@@ -479,6 +642,13 @@
     ['#chart8',  'specs/stacked-rsp-tech.json'],
     ['#chart9',  'specs/bar-underperform.json'],
     ['#chart10', 'specs/comparison-state.json'],
+    ['#chart11', 'specs/histogram-ratio.json'],
+    ['#chart12', 'specs/heatmap-geo-tech.json'],
+    ['#chart13', 'specs/waffle-tech.json'],
+    ['#chart14', 'specs/boxplot-tier.json'],
+    ['#chart15', 'specs/slope-speed.json'],
+    ['#chart16', 'specs/bump-state-rank.json'],
+    ['#chart17', 'specs/symbol-map.json'],
   ].forEach(([sel, url]) => {
     vegaEmbed(sel, url, OPT).catch(err => {
       const el = document.querySelector(sel);

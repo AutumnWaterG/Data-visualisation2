@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Box-and-whisker plot of actual busy-hour speeds grouped by advertised plan tier, MBA Report 28.",
+  "width": "container",
+  "height": 320,
+  "data": {"url": "data/mba-scatter.json"},
+  "mark": {
+    "type": "boxplot",
+    "extent": 1.5,
+    "outliers": {"size": 18, "opacity": 0.2},
+    "median": {"color": "white", "strokeWidth": 2},
+    "box": {"size": 38}
+  },
+  "encoding": {
+    "x": {
+      "field": "tier_label",
+      "type": "nominal",
+      "title": "Advertised plan tier",
+      "sort": {"field": "tier_mbps", "op": "min", "order": "ascending"},
+      "axis": {"labelAngle": -30, "labelLimit": 130}
+    },
+    "y": {
+      "field": "actual_mbps",
+      "type": "quantitative",
+      "title": "Actual busy-hour speed (Mbps)",
+      "scale": {"zero": false}
+    },
+    "color": {
+      "field": "tier_mbps",
+      "type": "quantitative",
+      "scale": {"scheme": "blues", "reverse": false},
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "tier_label", "type": "nominal", "title": "Plan tier"},
+      {"field": "actual_mbps", "type": "quantitative", "title": "Actual speed (Mbps)", "format": ".1f"}
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
+  }
+}
