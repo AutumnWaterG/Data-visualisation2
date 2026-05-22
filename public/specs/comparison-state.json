@@ -4,7 +4,7 @@
   "width": "container",
   "height": 320,
   "data": {
-    "url": "../data/comparison.json"
+    "url": "data/comparison.json"
   },
   "layer": [
     {

@@ -9,7 +9,7 @@
   "layer": [
     {
       "data": {
-        "url": "../data/australian-states.json",
+        "url": "data/australian-states.json",
         "format": {
           "type": "json",
           "property": "features"
@@ -24,7 +24,7 @@
     },
     {
       "data": {
-        "url": "../data/ookla-grid.json"
+        "url": "data/ookla-grid.json"
       },
       "transform": [
         { "calculate": "datum.lon - 0.25", "as": "lon_w" },

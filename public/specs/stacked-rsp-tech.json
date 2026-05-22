@@ -4,7 +4,7 @@
   "width": "container",
   "height": 320,
   "data": {
-    "url": "../data/mba-rsp-tech.json"
+    "url": "data/mba-rsp-tech.json"
   },
   "mark": {
     "type": "bar"

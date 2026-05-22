@@ -4,7 +4,7 @@
   "width": "container",
   "height": 320,
   "data": {
-    "url": "../data/mba-geography.json"
+    "url": "data/mba-geography.json"
   },
   "mark": {
     "type": "bar",

@@ -4,7 +4,7 @@
   "width": "container",
   "height": 300,
   "data": {
-    "url": "../data/mba-underperform.json"
+    "url": "data/mba-underperform.json"
   },
   "layer": [
     {

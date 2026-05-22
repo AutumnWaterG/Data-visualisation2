@@ -9,7 +9,7 @@
   "layer": [
     {
       "data": {
-        "url": "../data/australian-states.json",
+        "url": "data/australian-states.json",
         "format": {
           "type": "json",
           "property": "features"
@@ -24,7 +24,7 @@
           "lookup": "state_name_geo",
           "from": {
             "data": {
-              "url": "../data/ookla-state.json"
+              "url": "data/ookla-state.json"
             },
             "key": "state_name",
             "fields": [

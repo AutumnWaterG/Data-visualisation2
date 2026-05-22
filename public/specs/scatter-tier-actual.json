@@ -47,7 +47,7 @@
     },
     {
       "data": {
-        "url": "../data/mba-scatter.json"
+        "url": "data/mba-scatter.json"
       },
       "mark": {
         "type": "point",
