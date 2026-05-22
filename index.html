@@ -181,7 +181,7 @@
     }
 
     /* ── Vega container ──────────────────────────────────────────── */
-    .vc { width: 100%; }
+    .vc { width: 100%; min-height: 60px; }
     .vega-embed summary { display: none !important; }
     .vega-embed .vg-actions { display: none !important; }
 
@@ -482,8 +482,9 @@
   ].forEach(([sel, url]) => {
     vegaEmbed(sel, url, OPT).catch(err => {
       const el = document.querySelector(sel);
-      if (el) el.innerHTML = `<p style="color:#c00;padding:16px;font-size:.85rem">
-        Chart failed to load (${url}): ${err.message}</p>`;
+      if (el) el.innerHTML = `<div style="border:2px solid #c00;border-radius:8px;padding:20px;margin:8px 0;background:#fff5f5">
+        <strong style="color:#c00;font-size:1rem">Chart failed to load: ${url}</strong><br>
+        <code style="font-size:.82rem;color:#555">${err.message}</code></div>`;
       console.error(sel, err);
     });
   });

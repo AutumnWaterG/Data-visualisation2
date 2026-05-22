@@ -200,7 +200,12 @@ export default function IntroOverlay() {
     if (exiting) return
     setExiting(true)
     sessionStorage.setItem('intro-seen', '1')
-    setTimeout(() => setVisible(false), 660)
+    setTimeout(() => {
+      setVisible(false)
+      // Scroll so the first chart is in view immediately after the overlay leaves
+      const target = document.getElementById('chart1')
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 660)
   }, [exiting])
 
   // Escape key shortcut
