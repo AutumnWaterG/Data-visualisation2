@@ -52,9 +52,9 @@
           }
         },
         "tooltip": [
-          {"field": "lat",        "type": "quantitative", "title": "Latitude",           "format": ".1f"},
-          {"field": "lon",        "type": "quantitative", "title": "Longitude",          "format": ".1f"},
-          {"field": "avg_d_mbps", "type": "quantitative", "title": "Avg Download (Mbps)","format": ".1f"},
+          {"field": "lat",        "type": "quantitative", "title": "Latitude",            "format": ".1f"},
+          {"field": "lon",        "type": "quantitative", "title": "Longitude",           "format": ".1f"},
+          {"field": "avg_d_mbps", "type": "quantitative", "title": "Avg Download (Mbps)", "format": ".1f"},
           {"field": "n",          "type": "quantitative", "title": "Tiles in cell"}
         ]
       }
@@ -72,10 +72,10 @@
       "mark": {
         "type": "point",
         "filled": true,
-        "size": 55,
+        "size": 60,
         "color": "white",
         "stroke": "#1a2332",
-        "strokeWidth": 1.6
+        "strokeWidth": 1.8
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -95,9 +95,9 @@
       "mark": {
         "type": "text",
         "align": "right",
-        "dx": -13, "dy": -5,
-        "fontSize": 13, "fontWeight": "bold",
-        "color": "white", "stroke": "white", "strokeWidth": 7
+        "dx": -14, "dy": -6,
+        "fontSize": 14, "fontWeight": 700,
+        "color": "white", "stroke": "white", "strokeWidth": 18
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -112,9 +112,9 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "dx": 13, "dy": -5,
-        "fontSize": 13, "fontWeight": "bold",
-        "color": "white", "stroke": "white", "strokeWidth": 7
+        "dx": 14, "dy": -6,
+        "fontSize": 14, "fontWeight": 700,
+        "color": "white", "stroke": "white", "strokeWidth": 18
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -129,8 +129,8 @@
       "mark": {
         "type": "text",
         "align": "center",
-        "fontSize": 11, "fontStyle": "italic",
-        "color": "white", "stroke": "white", "strokeWidth": 5
+        "fontSize": 11, "fontWeight": 600,
+        "color": "white", "stroke": "white", "strokeWidth": 10
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -151,8 +151,8 @@
       "mark": {
         "type": "text",
         "align": "right",
-        "dx": -13, "dy": -5,
-        "fontSize": 13, "fontWeight": "bold",
+        "dx": -14, "dy": -6,
+        "fontSize": 14, "fontWeight": 700,
         "color": "#0f172a"
       },
       "encoding": {
@@ -168,8 +168,8 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "dx": 13, "dy": -5,
-        "fontSize": 13, "fontWeight": "bold",
+        "dx": 14, "dy": -6,
+        "fontSize": 14, "fontWeight": 700,
         "color": "#0f172a"
       },
       "encoding": {
@@ -185,8 +185,9 @@
       "mark": {
         "type": "text",
         "align": "center",
-        "fontSize": 11, "fontStyle": "italic",
-        "color": "#374151"
+        "fontSize": 11, "fontWeight": 600,
+        "fontStyle": "italic",
+        "color": "#1e3a5f"
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},

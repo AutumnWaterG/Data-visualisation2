@@ -317,6 +317,19 @@
       .card { padding: 22px 20px 18px; }
     }
 
+    /* ── Data context note ───────────────────────────────────────── */
+    .data-note {
+      background: #f0f6ff;
+      border-left: 4px solid var(--blue-dark);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 20px;
+      margin: 20px 0 4px;
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .data-note strong { color: var(--blue-dark); font-weight: 600; }
+
     /* ── Footer ──────────────────────────────────────────────────── */
     .site-footer {
       background: #111e30;
@@ -377,8 +390,14 @@
   <!-- Introduction -->
   <div class="intro-box">
     Australia's National Broadband Network (NBN) promised fast, reliable internet for all Australians &mdash; but is everyone actually getting the same experience?
-    This page explores <strong>82,000+ Ookla Speedtest measurements from 2021 Q3</strong> alongside <strong>1,787 monitored household services from the ACCC's March 2025 Measuring Broadband Australia report</strong>.
+    This page combines two datasets: <strong>82,000+ Ookla Speedtest measurements from 2021 Q3</strong> as a geographic baseline, and <strong>1,787 monitored household services from the ACCC's March 2025 Measuring Broadband Australia (MBA) report</strong> as the primary, up-to-date source.
     Together they reveal where speeds are fast, where they lag behind, which technologies are to blame, and whether Australian households are getting what they pay for.
+  </div>
+
+  <div class="data-note">
+    <strong>About the data:</strong>
+    The <strong>Ookla Speedtest Open Data (2021 Q3)</strong> captures crowd-sourced measurements from users who chose to run a speed test — it is used here as a historical reference point and to map geographic patterns across Australia. It is not a controlled sample, and reflects speeds as of 2021.
+    The <strong>ACCC Measuring Broadband Australia Report 28 (March 2025)</strong> monitors a dedicated panel of NBN subscribers under consistent conditions and is the primary source for technology and plan-tier analysis throughout this page. Where both datasets appear side by side (Parts 3 and 5), the Ookla figures provide a 2021 baseline for comparison, not a current measure.
   </div>
 
   <!-- ══ PART 1 ══════════════════════════════════════════════════════════
@@ -589,7 +608,7 @@
       <div class="pure-u-1 pure-u-lg-1-2" style="padding-right:20px">
         <div class="col-head">
           <h3>Fibre over-delivers; copper under-delivers</h3>
-          <p>Each line traces one technology from its <strong>mean advertised speed</strong> to its <strong>mean actual busy-hour speed</strong>. Lines sloping <em>upward</em> mean the technology over-delivers on average; lines sloping <em>downward</em> mean it falls short. FTTP and HFC both rise &mdash; providers under-promise and over-deliver. FTTN and Satellite slope down, confirming systematic underperformance.</p>
+          <p>Each line traces one technology from its <strong>mean advertised speed</strong> to its <strong>mean actual busy-hour speed</strong>. Lines sloping <em>upward</em> mean the technology over-delivers on average; lines sloping <em>downward</em> mean it falls short. FTTN falls slightly, showing that copper-based technology under-delivers. Satellite and Fibre to the Curb perform close to or slightly above advertised speeds, while FTTP and HFC clearly over-deliver.</p>
         </div>
         <div id="chart15" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
@@ -597,7 +616,7 @@
       <div class="pure-u-1 pure-u-lg-1-2" style="padding-left:20px">
         <div class="col-head">
           <h3>State speed rankings reshuffled since 2021</h3>
-          <p>The bump chart tracks each state's <strong>speed rank</strong> (1&nbsp;= fastest) from Ookla&nbsp;2021 to ACCC&nbsp;2025. The ACT and VIC have held the top spots, but the middle pack has shuffled significantly as FTTP upgrades roll out unevenly. States that adopted fibre early climbed; those still relying on copper fell behind. Hover a line to see exact speeds.</p>
+          <p>The bump chart tracks each state's <strong>speed rank</strong> (1&nbsp;= fastest) from Ookla&nbsp;2021 to ACCC&nbsp;2025. VIC climbed to first place, while ACT remained in the top three. WA improved the most, moving from last place to second, while NSW dropped from second to fifth. Hover a line to see exact speeds.</p>
         </div>
         <div id="chart16" class="vc"></div>
         <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025</span>
@@ -663,7 +682,7 @@
           &mdash; Rasmus Andersson, Google Fonts (SIL Open Font Licence).
         </p>
         <h4 style="margin-top:20px">Licence</h4>
-        <p>Visualisation code and narrative text &copy; 2026 [Your Name]. Data remains under original licences above.</p>
+        <p>Visualisation code and narrative text &copy; 2026 Zhongfan Dong. Data remains under original licences above.</p>
       </div>
     </div>
   </div>

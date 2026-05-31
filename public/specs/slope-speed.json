@@ -46,15 +46,15 @@
         },
         "detail": {"field": "technology"},
         "tooltip": [
-          {"field": "technology",  "type": "nominal",      "title": "Technology"},
-          {"field": "Speed Type",  "type": "nominal",      "title": "Metric"},
-          {"field": "speed",       "type": "quantitative", "title": "Mean speed (Mbps)", "format": ".1f"}
+          {"field": "technology", "type": "nominal",      "title": "Technology"},
+          {"field": "Speed Type", "type": "nominal",      "title": "Metric"},
+          {"field": "speed",      "type": "quantitative", "title": "Mean speed (Mbps)", "format": ".1f"}
         ]
       }
     },
     {
       "transform": [{"filter": "datum['Speed Type'] === 'Actual'"}],
-      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 10.5, "fontWeight": 600},
+      "mark": {"type": "text", "align": "left", "dx": 8, "dy": 1, "fontSize": 10.5, "fontWeight": 600},
       "encoding": {
         "x":    {"field": "Speed Type", "type": "ordinal", "sort": ["Advertised", "Actual"]},
         "y":    {"field": "speed", "type": "quantitative"},
@@ -67,6 +67,33 @@
             "range": ["#1565c0", "#1976d2", "#42a5f5", "#78909c", "#f57c00", "#bf360c"]
           }
         }
+      }
+    },
+    {
+      "transform": [{"filter": "datum['Speed Type'] === 'Actual' && datum.technology === 'Fibre to the Premises'"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "dy": -14, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "Speed Type", "type": "ordinal", "sort": ["Advertised", "Actual"]},
+        "y":    {"field": "speed", "type": "quantitative"},
+        "text": {"value": "FTTP strongest over-delivery"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum['Speed Type'] === 'Actual' && datum.technology === 'Fibre to the Node'"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "dy": -14, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "Speed Type", "type": "ordinal", "sort": ["Advertised", "Actual"]},
+        "y":    {"field": "speed", "type": "quantitative"},
+        "text": {"value": "FTTN below advertised"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum['Speed Type'] === 'Actual' && datum.technology === 'Fixed Wireless'"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "dy": -14, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "Speed Type", "type": "ordinal", "sort": ["Advertised", "Actual"]},
+        "y":    {"field": "speed", "type": "quantitative"},
+        "text": {"value": "Fixed Wireless remains slow"}
       }
     }
   ],

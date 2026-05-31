@@ -29,17 +29,13 @@
           "scale": {"domain": [1, 8], "reverse": true},
           "axis": {"tickMinStep": 1, "values": [1,2,3,4,5,6,7,8]}
         },
-        "color": {
-          "field": "state",
-          "type": "nominal",
-          "legend": null
-        },
+        "color": {"field": "state", "type": "nominal", "legend": null},
         "detail": {"field": "state"},
         "tooltip": [
-          {"field": "state",  "type": "nominal",      "title": "State"},
-          {"field": "year",   "type": "nominal",       "title": "Dataset"},
-          {"field": "speed",  "type": "quantitative",  "title": "Avg speed (Mbps)", "format": ".0f"},
-          {"field": "rank",   "type": "quantitative",  "title": "Rank"}
+          {"field": "state", "type": "nominal",      "title": "State"},
+          {"field": "year",  "type": "nominal",       "title": "Dataset"},
+          {"field": "speed", "type": "quantitative",  "title": "Avg speed (Mbps)", "format": ".0f"},
+          {"field": "rank",  "type": "quantitative",  "title": "Rank"}
         ]
       }
     },
@@ -54,10 +50,10 @@
         "y": {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
         "color": {"field": "state", "type": "nominal", "legend": null},
         "tooltip": [
-          {"field": "state",  "type": "nominal",     "title": "State"},
-          {"field": "year",   "type": "nominal",      "title": "Dataset"},
-          {"field": "speed",  "type": "quantitative", "title": "Avg speed (Mbps)", "format": ".0f"},
-          {"field": "rank",   "type": "quantitative", "title": "Rank"}
+          {"field": "state", "type": "nominal",     "title": "State"},
+          {"field": "year",  "type": "nominal",      "title": "Dataset"},
+          {"field": "speed", "type": "quantitative", "title": "Avg speed (Mbps)", "format": ".0f"},
+          {"field": "rank",  "type": "quantitative", "title": "Rank"}
         ]
       }
     },
@@ -79,6 +75,33 @@
         "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
         "text": {"field": "state", "type": "nominal"},
         "color": {"field": "state", "type": "nominal", "legend": null}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === '2025 (ACCC MBA)' && datum.state === 'VIC'"}],
+      "mark": {"type": "text", "align": "left", "dx": 10, "dy": 13, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "year", "type": "ordinal", "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]},
+        "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "text": {"value": "becomes fastest"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === '2025 (ACCC MBA)' && datum.state === 'WA'"}],
+      "mark": {"type": "text", "align": "left", "dx": 10, "dy": 13, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "year", "type": "ordinal", "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]},
+        "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "text": {"value": "biggest improvement"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === '2025 (ACCC MBA)' && datum.state === 'NSW'"}],
+      "mark": {"type": "text", "align": "left", "dx": 10, "dy": 13, "fontSize": 9, "fontStyle": "italic", "color": "#4b5563"},
+      "encoding": {
+        "x":    {"field": "year", "type": "ordinal", "sort": ["2021 (Ookla)", "2025 (ACCC MBA)"]},
+        "y":    {"field": "rank", "type": "quantitative", "scale": {"domain": [1, 8], "reverse": true}},
+        "text": {"value": "drops"}
       }
     }
   ],
