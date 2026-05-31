@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Busy hour trimmed mean download speed by state and geography type, MBA Report 28, 2025.",
   "width": "container",
-  "height": 320,
+  "height": 280,
   "data": {
     "url": "data/mba-state.json"
   },
@@ -55,7 +55,9 @@
           },
           "legend": {
             "title": "Geography",
-            "orient": "bottom"
+            "orient": "right",
+            "labelFontSize": 11,
+            "titleFontSize": 11
           }
         },
         "tooltip": [

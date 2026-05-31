@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Average busy hour download speed by geography and technology, MBA 2025.",
   "width": "container",
-  "height": 320,
+  "height": 260,
   "data": {
     "url": "data/mba-geography.json"
   },
@@ -60,7 +60,11 @@
       },
       "legend": {
         "title": "Technology",
-        "orient": "bottom"
+        "orient": "top",
+        "columns": 3,
+        "labelFontSize": 10,
+        "titleFontSize": 11,
+        "symbolSize": 80
       }
     },
     "tooltip": [

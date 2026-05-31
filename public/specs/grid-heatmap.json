@@ -1,101 +1,197 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Ookla 2021 Q3 fixed broadband speeds binned to 0.5? grid tiles.",
+  "description": "Ookla 2021 Q3 fixed broadband speeds binned to 0.5° grid tiles.",
   "width": "container",
-  "height": 380,
-  "projection": {
-    "type": "mercator"
-  },
+  "height": 540,
+  "projection": {"type": "mercator"},
   "layer": [
     {
       "data": {
         "url": "data/australian-states.json",
-        "format": {
-          "type": "json",
-          "property": "features"
-        }
+        "format": {"type": "json", "property": "features"}
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#e9ecef",
-        "stroke": "#adb5bd",
-        "strokeWidth": 0.8
+        "fill": "#dde3e9",
+        "stroke": "#b0bec5",
+        "strokeWidth": 0.9
       }
     },
     {
-      "data": {
-        "url": "data/ookla-grid.json"
-      },
+      "data": {"url": "data/ookla-grid.json"},
       "transform": [
-        { "calculate": "datum.lon - 0.25", "as": "lon_w" },
-        { "calculate": "datum.lon + 0.25", "as": "lon_e" },
-        { "calculate": "datum.lat - 0.25", "as": "lat_s" },
-        { "calculate": "datum.lat + 0.25", "as": "lat_n" }
+        {"calculate": "datum.lon - 0.25", "as": "lon_w"},
+        {"calculate": "datum.lon + 0.25", "as": "lon_e"},
+        {"calculate": "datum.lat - 0.25", "as": "lat_s"},
+        {"calculate": "datum.lat + 0.25", "as": "lat_n"}
       ],
-      "mark": {
-        "type": "rect",
-        "opacity": 0.85
-      },
+      "mark": {"type": "rect", "opacity": 0.9},
       "encoding": {
-        "longitude": {
-          "field": "lon_w",
-          "type": "quantitative"
-        },
-        "longitude2": { "field": "lon_e" },
-        "latitude": {
-          "field": "lat_n",
-          "type": "quantitative"
-        },
-        "latitude2": { "field": "lat_s" },
+        "longitude": {"field": "lon_w", "type": "quantitative"},
+        "longitude2": {"field": "lon_e"},
+        "latitude":   {"field": "lat_n", "type": "quantitative"},
+        "latitude2":  {"field": "lat_s"},
         "color": {
           "field": "avg_d_mbps",
           "type": "quantitative",
           "scale": {
             "type": "linear",
-            "domain": [
-              0,
-              50,
-              150,
-              400
-            ],
-            "range": [
-              "#bf360c",
-              "#f57c00",
-              "#1976d2",
-              "#1565c0"
-            ]
+            "domain": [0, 50, 150, 400],
+            "range": ["#fff3e0", "#f57c00", "#64b5f6", "#1565c0"]
           },
           "legend": {
+            "orient": "right",
+            "gradientLength": 220,
+            "gradientThickness": 14,
             "title": "Avg Speed (Mbps)",
-            "orient": "bottom-right",
-            "gradientLength": 110
+            "titleFontSize": 11,
+            "titleFontWeight": 600,
+            "labelFontSize": 10,
+            "values": [0, 50, 150, 400],
+            "labelExpr": "datum.value === 0 ? 'Slower (0)' : datum.value >= 400 ? 'Faster (400+)' : datum.label + ' Mbps'"
           }
         },
         "tooltip": [
-          {
-            "field": "lat",
-            "type": "quantitative",
-            "title": "Latitude",
-            "format": ".1f"
-          },
-          {
-            "field": "lon",
-            "type": "quantitative",
-            "title": "Longitude",
-            "format": ".1f"
-          },
-          {
-            "field": "avg_d_mbps",
-            "type": "quantitative",
-            "title": "Avg Download (Mbps)",
-            "format": ".1f"
-          },
-          {
-            "field": "n",
-            "type": "quantitative",
-            "title": "Tiles in cell"
-          }
+          {"field": "lat",        "type": "quantitative", "title": "Latitude",           "format": ".1f"},
+          {"field": "lon",        "type": "quantitative", "title": "Longitude",          "format": ".1f"},
+          {"field": "avg_d_mbps", "type": "quantitative", "title": "Avg Download (Mbps)","format": ".1f"},
+          {"field": "n",          "type": "quantitative", "title": "Tiles in cell"}
         ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"city": "Sydney",    "lon": 151.2, "lat": -33.9},
+          {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
+          {"city": "Brisbane",  "lon": 153.0, "lat": -27.5},
+          {"city": "Perth",     "lon": 115.9, "lat": -31.9},
+          {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 55,
+        "color": "white",
+        "stroke": "#1a2332",
+        "strokeWidth": 1.6
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"}
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {"city": "Sydney",    "lon": 151.2, "lat": -33.9},
+          {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
+          {"city": "Brisbane",  "lon": 153.0, "lat": -27.5},
+          {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -13, "dy": -5,
+        "fontSize": 13, "fontWeight": "bold",
+        "color": "white", "stroke": "white", "strokeWidth": 7
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"city": "Perth", "lon": 115.9, "lat": -31.9}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 13, "dy": -5,
+        "fontSize": 13, "fontWeight": "bold",
+        "color": "white", "stroke": "white", "strokeWidth": 7
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"note": "Grey areas = limited Speedtest coverage", "lon": 129.5, "lat": -24.5}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontSize": 11, "fontStyle": "italic",
+        "color": "white", "stroke": "white", "strokeWidth": 5
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "note", "type": "nominal"}
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {"city": "Sydney",    "lon": 151.2, "lat": -33.9},
+          {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
+          {"city": "Brisbane",  "lon": 153.0, "lat": -27.5},
+          {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -13, "dy": -5,
+        "fontSize": 13, "fontWeight": "bold",
+        "color": "#0f172a"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"city": "Perth", "lon": 115.9, "lat": -31.9}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 13, "dy": -5,
+        "fontSize": 13, "fontWeight": "bold",
+        "color": "#0f172a"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [{"note": "Grey areas = limited Speedtest coverage", "lon": 129.5, "lat": -24.5}]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontSize": 11, "fontStyle": "italic",
+        "color": "#374151"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "note", "type": "nominal"}
       }
     }
   ],

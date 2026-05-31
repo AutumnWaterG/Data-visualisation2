@@ -54,8 +54,9 @@
           },
           "legend": {
             "title": "Avg Speed (Mbps)",
-            "orient": "bottom-right",
-            "gradientLength": 100
+            "orient": "bottom",
+            "gradientLength": 120,
+            "direction": "horizontal"
           }
         },
         "tooltip": [

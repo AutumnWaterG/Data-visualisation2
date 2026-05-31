@@ -34,7 +34,7 @@
           "title": "Speedtest count",
           "scale": {"range": [200, 5000], "type": "sqrt"},
           "legend": {
-            "orient": "bottom-right",
+            "orient": "right",
             "title": "Tests",
             "values": [1000, 5000, 10000, 20000],
             "symbolFillColor": "#888"
@@ -45,7 +45,7 @@
           "type": "quantitative",
           "title": "Avg speed (Mbps)",
           "scale": {"scheme": "blues", "domain": [47, 62]},
-          "legend": {"orient": "bottom-left", "gradientLength": 110, "title": "Avg dl\n(Mbps)"}
+          "legend": {"orient": "right", "gradientLength": 100, "title": "Avg dl\n(Mbps)"}
         },
         "tooltip": [
           {"field": "state_name",  "type": "nominal",      "title": "State"},

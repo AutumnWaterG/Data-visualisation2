@@ -239,6 +239,9 @@
       margin-top: 24px;
       box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 28px rgba(0,0,0,.05);
     }
+    .card-map {
+      padding: 24px 20px 16px;
+    }
 
     /* ── Narrative column ────────────────────────────────────────── */
     .narr {
@@ -405,10 +408,10 @@
   </div>
 
   <!-- Chart 2: Grid heatmap — full width, text above -->
-  <div class="card">
+  <div class="card card-map">
     <div class="card-head">
       <h3>Speed follows population density</h3>
-      <p>Zooming in to a 0.5&deg; grid reveals how strongly speed tracks population. <strong>Blue cells</strong> mark the fastest areas, clustering tightly around Sydney, Melbourne, Brisbane, and Perth. <strong>Orange and red</strong> highlight slower regions &mdash; rural coastal areas and the interior. Urban tiles often exceed 100&nbsp;Mbps; remote rural tiles average below 30&nbsp;Mbps. The vast grey interior reflects limited Speedtest coverage, not zero broadband.</p>
+      <p>Zooming in to a 0.5&deg; grid reveals how strongly speed tracks population. <strong>Dark blue cells</strong> mark the fastest areas, clustering tightly around Sydney, Melbourne, Brisbane, and Perth. <strong>Light orange</strong> highlights slower regions &mdash; rural coastal zones and the remote interior. Urban tiles often exceed 100&nbsp;Mbps; remote rural tiles average below 30&nbsp;Mbps. City labels mark the five largest urban centres where broadband is fastest.</p>
     </div>
     <div id="chart2" class="vc"></div>
     <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
