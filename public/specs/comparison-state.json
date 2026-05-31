@@ -63,7 +63,7 @@
           },
           "legend": {
             "title": "Dataset",
-            "orient": "top-right"
+            "orient": "top"
           }
         },
         "tooltip": [

@@ -46,7 +46,6 @@
 
     /* ── Hero header ─────────────────────────────────────────────── */
     .site-header {
-      min-height: 100vh;
       background: linear-gradient(160deg, #040d1e 0%, #071533 22%, #0b2a70 52%, #1254b5 76%, #1e78d0 100%);
       color: #fff;
       display: flex;
@@ -56,7 +55,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      padding: 80px 24px 160px;
+      padding: 56px 24px 80px;
     }
     .site-header::after {
       content: '';
@@ -137,7 +136,7 @@
     /* ── Scroll indicator ────────────────────────────────────────── */
     .scroll-hint {
       position: absolute;
-      bottom: 42px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -281,6 +280,20 @@
     .card-head h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.4; margin: 0 0 6px; }
     .card-head p  { color: var(--muted); font-size: .92rem; line-height: 1.78; max-width: 780px; margin: 0 0 18px; }
 
+    /* Sub-label above each chart in a split card */
+    .chart-sub-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    /* In-card chart column heading (paired charts) */
+    .col-head h3 { font-size: 1rem; font-weight: 700; color: var(--blue-dark); line-height: 1.4; margin: 0 0 6px; }
+    .col-head p  { color: var(--muted); font-size: .88rem; line-height: 1.75; margin: 0 0 14px; }
+
     /* ── Source tags ─────────────────────────────────────────────── */
     .src {
       display: block;
@@ -365,15 +378,15 @@
     Together they reveal where speeds are fast, where they lag behind, which technologies are to blame, and whether Australian households are getting what they pay for.
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════
-       PART 1: WHERE IS FAST AND WHERE IS SLOW?
-  ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PART 1 ══════════════════════════════════════════════════════════
+       WHERE IS FAST AND WHERE IS SLOW?
+  ═══════════════════════════════════════════════════════════════════════ -->
   <div class="part-header">
     <div class="part-label">Part 1</div>
     <h2>Where is Fast and Where is Slow?</h2>
   </div>
 
-  <!-- Chart 1: Choropleth -->
+  <!-- Chart 1: Choropleth — map right, narrative left -->
   <div class="card">
     <div class="pure-g">
       <div class="pure-u-1 pure-u-lg-1-3 narr">
@@ -391,64 +404,38 @@
     </div>
   </div>
 
-  <!-- Chart 2: Grid heatmap -->
+  <!-- Chart 2: Grid heatmap — full width, text above -->
   <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Speed follows population density</h3>
-        <p>Zooming in to a 0.5&deg; grid reveals how strongly speed tracks population. <strong>Blue cells</strong> mark the fastest areas, clustering tightly around Sydney, Melbourne, Brisbane, and Perth. <strong>Orange and red</strong> highlight slower regions &mdash; rural coastal areas and the interior. The vast grey interior reflects limited Speedtest coverage in remote zones, not zero broadband.</p>
-        <div class="callout">
-          <strong>City vs Country</strong>
-          <span>Urban tiles often exceed 100&nbsp;Mbps; remote rural tiles average below 30&nbsp;Mbps</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
-        <div id="chart2" class="vc"></div>
-        <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
-      </div>
+    <div class="card-head">
+      <h3>Speed follows population density</h3>
+      <p>Zooming in to a 0.5&deg; grid reveals how strongly speed tracks population. <strong>Blue cells</strong> mark the fastest areas, clustering tightly around Sydney, Melbourne, Brisbane, and Perth. <strong>Orange and red</strong> highlight slower regions &mdash; rural coastal areas and the interior. Urban tiles often exceed 100&nbsp;Mbps; remote rural tiles average below 30&nbsp;Mbps. The vast grey interior reflects limited Speedtest coverage, not zero broadband.</p>
     </div>
+    <div id="chart2" class="vc"></div>
+    <span class="src">Source: Ookla Speedtest Open Data, 2021 Q3 (CC BY 4.0)</span>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════
-       PART 2: WHY IS IT SLOW?
-  ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PART 2 ══════════════════════════════════════════════════════════
+       WHY IS IT SLOW? TECHNOLOGY AND GEOGRAPHY
+  ═══════════════════════════════════════════════════════════════════════ -->
   <div class="part-header">
     <div class="part-label">Part 2</div>
     <h2>Why is it Slow? Technology and Geography</h2>
   </div>
 
-  <!-- Chart 3: Bar by state + geography -->
+  <!-- Charts 3 + 4: two charts side by side, shared header above -->
   <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Urban areas lead in every single state</h3>
-        <p>By 2025, average busy-hour speeds had jumped dramatically as more Australians upgraded to higher-tier plans (250&nbsp;Mbps, 500&nbsp;Mbps, 1&nbsp;Gbps). But within every state, <strong>urban residents consistently outperform their rural counterparts</strong> &mdash; often by a factor of two to four. Victoria's urban panel averaged over 300&nbsp;Mbps, while Tasmania's minor-rural services managed just 64&nbsp;Mbps.</p>
-        <p>The dashed line marks the national average across all panel services (~252&nbsp;Mbps). Almost no rural or minor-rural areas reach this benchmark.</p>
-        <div class="callout">
-          <strong>4.6&times; gap</strong>
-          <span>VIC urban (319 Mbps) vs TAS minor rural (64 Mbps)</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
+    <div class="card-head">
+      <h3>Urban areas outperform rural areas &mdash; in every state and across every technology</h3>
+      <p>Whether you look by state (left) or by technology (right), the urban&ndash;rural gap is consistent and large. Victoria's urban services averaged over 300&nbsp;Mbps while Tasmania's minor-rural services managed just 64&nbsp;Mbps &mdash; a 4.6&times; gap. FTTP delivers blazing speeds in urban areas, while rural communities rely on Fixed Wireless and FTTN, technologies limited by copper wire distance from the node.</p>
+    </div>
+    <div class="pure-g" style="margin-top:16px">
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-right:20px">
+        <p class="chart-sub-label">By state &amp; geography</p>
         <div id="chart3" class="vc"></div>
         <span class="src">Source: ACCC Measuring Broadband Australia Report 28, March 2025 (CC BY 2.5 AU)</span>
       </div>
-    </div>
-  </div>
-
-  <!-- Chart 4: Bar by geography + technology -->
-  <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>FTTP transforms urban speeds; rural areas rely on older tech</h3>
-        <p>The technology mix explains much of the geographic divide. <strong>Fibre to the Premises (FTTP)</strong> delivers blazing speeds in urban areas, while rural and minor-rural communities depend more on <strong>Fixed Wireless</strong> and <strong>Fibre to the Node (FTTN)</strong> &mdash; technologies with inherently lower speed ceilings set by copper wire distance.</p>
-        <p>Satellite services (Sky Muster and Starlink) serve the most remote areas but still lag far behind urban fibre &mdash; though Starlink has brought a step-change improvement over the old NBN Sky Muster satellite.</p>
-        <div class="callout">
-          <strong>FTTP vs FTTN</strong>
-          <span>Urban FTTP averages roughly 3&times; the speed of urban FTTN</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-left:20px">
+        <p class="chart-sub-label">By technology &amp; geography</p>
         <div id="chart4" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
@@ -458,22 +445,26 @@
   <!-- Charts 5 + 6: Donut + Box plot side by side -->
   <div class="card">
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-5-12" style="padding-right: 24px;">
-        <h3 style="font-size:1.05rem;font-weight:700;color:var(--blue-dark);margin:0 0 8px">Technology share in the monitoring panel</h3>
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">FTTN remains the most common technology in the 2025 panel &mdash; a legacy of the early NBN rollout that prioritised copper nodes over full-fibre. However, FTTP is growing rapidly as the government's fibre upgrade programme accelerates nationwide.</p>
+      <div class="pure-u-1 pure-u-lg-5-12" style="padding-right:24px">
+        <div class="col-head">
+          <h3>Technology share in the monitoring panel</h3>
+          <p>FTTN remains the most common technology in the 2025 panel &mdash; a legacy of the early NBN rollout that prioritised copper nodes over full-fibre. However, FTTP is growing rapidly as the government's fibre upgrade programme accelerates nationwide.</p>
+        </div>
         <div id="chart5" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025</span>
       </div>
-      <div class="pure-u-1 pure-u-lg-7-12" style="padding-left: 12px;">
-        <h3 style="font-size:1.05rem;font-weight:700;color:var(--blue-dark);margin:0 0 8px">Fibre pulls far ahead &mdash; and is more consistent</h3>
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">The box plot reveals not just average differences but the <em>consistency</em> of each technology. FTTP services cluster tightly at high speeds. FTTN shows a wide spread &mdash; some services barely reach 20&nbsp;Mbps, others hit 100&nbsp;Mbps, depending on copper line distance. Satellite has the widest spread of all, driven by weather, congestion, and orbital differences between Sky Muster and Starlink.</p>
+      <div class="pure-u-1 pure-u-lg-7-12" style="padding-left:12px">
+        <div class="col-head">
+          <h3>Fibre pulls far ahead &mdash; and is more consistent</h3>
+          <p>The box plot reveals not just average differences but the <em>consistency</em> of each technology. FTTP services cluster tightly at high speeds. FTTN shows a wide spread &mdash; some services barely reach 20&nbsp;Mbps, others hit 100&nbsp;Mbps, depending on copper line distance. Satellite has the widest spread of all, driven by weather, congestion, and orbital differences between Sky Muster and Starlink.</p>
+        </div>
         <div id="chart6" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025</span>
       </div>
     </div>
   </div>
 
-  <!-- Chart 8: Stacked bar by RSP -->
+  <!-- Chart 8: full width, text above -->
   <div class="card">
     <div class="card-head">
       <h3>Which providers use which technology?</h3>
@@ -483,123 +474,95 @@
     <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════
-       PART 3: ARE WE GETTING WHAT WE PAID FOR?
-  ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PART 3 ══════════════════════════════════════════════════════════
+       ARE WE GETTING WHAT WE PAID FOR?
+  ═══════════════════════════════════════════════════════════════════════ -->
   <div class="part-header">
     <div class="part-label">Part 3</div>
     <h2>Are We Getting What We Paid For?</h2>
   </div>
 
-  <!-- Chart 7: Scatter plot -->
+  <!-- Chart 7: full width, text above -->
   <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Most services deliver &mdash; but not all</h3>
-        <p>Each dot compares a service's <em>advertised plan tier</em> (x-axis) against its <em>actual busy-hour speed</em> (y-axis). Points along the dashed diagonal represent <strong>perfect delivery</strong>. Points below the line are underperforming. FTTP and HFC generally cluster close to the diagonal. FTTN and Fixed Wireless show more scatter, frequently falling short on higher-tier plans &mdash; a copper ceiling that no amount of plan upgrade can overcome.</p>
-        <div class="callout">
-          <strong>Log scale</strong>
-          <span>Both axes use a log scale to span from 12&nbsp;Mbps entry plans to 1&nbsp;Gbps services</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
-        <div id="chart7" class="vc"></div>
-        <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
-      </div>
+    <div class="card-head">
+      <h3>Most services deliver &mdash; but not all</h3>
+      <p>Each dot compares a service's <em>advertised plan tier</em> (x-axis) against its <em>actual busy-hour speed</em> (y-axis). Points along the dashed diagonal represent <strong>perfect delivery</strong>; points below the line are underperforming. FTTP and HFC generally cluster close to the diagonal. FTTN and Fixed Wireless show more scatter, frequently falling short on higher-tier plans &mdash; a copper ceiling that no plan upgrade can overcome. Both axes use a <strong>log scale</strong> spanning from 12&nbsp;Mbps entry plans to 1&nbsp;Gbps services.</p>
     </div>
+    <div id="chart7" class="vc"></div>
+    <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
   </div>
 
-  <!-- Chart 9: Underperforming bar -->
+  <!-- Charts 9 + 11: side by side -->
   <div class="card">
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Older technologies fail customers most often</h3>
-        <p>The ACCC classifies a service as "underperforming" when it consistently delivers less than 75% of its advertised speed during busy hours. <strong>Fibre to the Node (FTTN)</strong> has the highest underperformance rate, reflecting physical limits of copper phone lines. <strong>FTTP and HFC</strong> rarely underperform because fibre delivers consistent speeds regardless of distance from the exchange or node.</p>
-        <div class="callout">
-          <strong>FTTN</strong>
-          <span>Most likely to underperform among all fixed NBN technologies</span>
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-right:20px">
+        <div class="col-head">
+          <h3>Older technologies fail customers most often</h3>
+          <p>The ACCC classifies a service as "underperforming" when it consistently delivers less than 75% of its advertised speed during busy hours. <strong>Fibre to the Node (FTTN)</strong> has the highest underperformance rate, reflecting physical limits of copper phone lines. <strong>FTTP and HFC</strong> rarely underperform because fibre delivers consistent speeds regardless of distance from the exchange.</p>
         </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
         <div id="chart9" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
-    </div>
-  </div>
-
-  <!-- Chart 10: 2021 vs 2025 comparison -->
-  <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Australia's broadband speeds have soared since 2021</h3>
-        <p>Comparing Ookla's 2021 crowd-sourced measurements with the ACCC's 2025 monitored panel reveals a striking shift. Average speeds have roughly <strong>quadrupled</strong> across most states, driven by uptake of higher-tier plans and the ongoing FTTP upgrade rollout.</p>
-        <p><em>Caveat:</em> the datasets measure different things &mdash; Ookla captures all Speedtest users, while the ACCC panel skews toward monitored broadband subscribers. Both confirm the upward trend, though absolute numbers differ.</p>
-        <div class="callout">
-          <strong>~4&times; faster</strong>
-          <span>State averages grew from ~55&nbsp;Mbps (2021) to ~240&nbsp;Mbps (2025)</span>
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-left:20px">
+        <div class="col-head">
+          <h3>Fibre reliably delivers; copper and satellite often fall short</h3>
+          <p>Each bar shows <strong>what share of services deliver less than 75%, 75&ndash;90%, 90&ndash;110%, or more than 110%</strong> of their advertised plan speed. FTTP and HFC push almost all their services into the <em>meets or exceeds</em> categories. <strong>Satellite</strong> is the most unpredictable: 42% over-deliver (likely Starlink burst capacity) while 34% significantly under-deliver.</p>
         </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
-        <div id="chart10" class="vc"></div>
-        <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 (CC BY 4.0) &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ══════════════════════════════════════════════════════════════════
-       PART 4: A DEEPER LOOK AT THE DATA
-  ══════════════════════════════════════════════════════════════════════ -->
-  <div class="part-header">
-    <div class="part-label">Part 4</div>
-    <h2>A Deeper Look at the Data</h2>
-  </div>
-
-  <!-- Chart 11: Histogram — speed achievement ratio -->
-  <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Most services hit their speed target — but a stubborn tail falls short</h3>
-        <p>This histogram shows how each monitored service's <strong>actual busy-hour speed compares to its advertised plan tier</strong>. A ratio of 1.0 (red dashed line) means perfect delivery. The tall spike just right of 1.0 shows that most FTTP and HFC services actually <em>exceed</em> their plan. The orange bars to the left reveal a persistent minority of services — mostly FTTN — that consistently under-deliver.</p>
-        <div class="callout">
-          <strong>Right-skewed</strong>
-          <span>Fibre services cluster above 1.0; copper-based FTTN drags the left tail down</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
         <div id="chart11" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
     </div>
   </div>
 
+  <!-- Chart 10: full width, text above -->
+  <div class="card">
+    <div class="card-head">
+      <h3>Australia's broadband speeds have soared since 2021</h3>
+      <p>Comparing Ookla's 2021 crowd-sourced measurements with the ACCC's 2025 monitored panel reveals a striking shift. Average speeds have roughly <strong>quadrupled</strong> across most states, driven by uptake of higher-tier plans and the ongoing FTTP upgrade rollout. <em>Note:</em> the datasets measure different things &mdash; Ookla captures all Speedtest users, while the ACCC panel monitors specific broadband subscribers. Both confirm the strong upward trend.</p>
+    </div>
+    <div id="chart10" class="vc"></div>
+    <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 (CC BY 4.0) &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
+  </div>
+
+  <!-- ══ PART 4 ══════════════════════════════════════════════════════════
+       A DEEPER LOOK AT THE DATA
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Part 4</div>
+    <h2>A Deeper Look at the Data</h2>
+  </div>
+
   <!-- Charts 12 + 13: Heatmap + Waffle side by side -->
   <div class="card">
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-7-12" style="padding-right: 24px;">
-        <h3>The fibre–copper divide is visible at a glance</h3>
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">Each cell shows the average download speed for a geography–technology combination. <strong>Darker blue = faster</strong>. FTTP stays dark across all geographies; Satellite and FTTN are consistently pale. Rural areas gain almost nothing by upgrading from FTTN to Fixed Wireless — only full fibre moves the needle.</p>
+      <div class="pure-u-1 pure-u-lg-7-12" style="padding-right:24px">
+        <div class="col-head">
+          <h3>The fibre&ndash;copper divide is visible at a glance</h3>
+          <p>Each cell shows the average download speed for a geography&ndash;technology combination. <strong>Darker blue = faster</strong>. FTTP stays dark across all geographies; Satellite and FTTN are consistently pale. Rural areas gain almost nothing by upgrading from FTTN to Fixed Wireless &mdash; only full fibre moves the needle.</p>
+        </div>
         <div id="chart12" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
-      <div class="pure-u-1 pure-u-lg-5-12" style="padding-left: 12px;">
-        <h3>Nearly half the panel is now on fibre</h3>
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.78;margin:0 0 14px">Each square = 1% of the 1,787 monitored services. <strong>FTTP now holds 45 squares</strong> — the single largest block — thanks to the government's accelerated fibre upgrade. Yet legacy technologies (FTTN&nbsp;18% + HFC&nbsp;21%) still account for nearly 40% of all connections.</p>
+      <div class="pure-u-1 pure-u-lg-5-12" style="padding-left:12px">
+        <div class="col-head">
+          <h3>Nearly half the panel is now on fibre</h3>
+          <p>Each square = 1% of the 1,787 monitored services. <strong>FTTP now holds 45 squares</strong> &mdash; the single largest block &mdash; thanks to the government's accelerated fibre upgrade. Yet legacy technologies (FTTN&nbsp;18% + HFC&nbsp;21%) still account for nearly 40% of all connections.</p>
+        </div>
         <div id="chart13" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
     </div>
   </div>
 
-  <!-- Chart 14: Box plot by plan tier -->
+  <!-- Chart 14: narrative left + chart right -->
   <div class="card">
     <div class="pure-g">
       <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Higher plan tiers deliver more — but with far greater spread</h3>
-        <p>Entry-level 25&nbsp;Mbps plans are consistent: almost everyone gets close to 25&nbsp;Mbps. But 500&nbsp;Mbps and 1&nbsp;Gbps plans show wide boxes — some households hit 900+&nbsp;Mbps while others struggle below 200&nbsp;Mbps. The spread at the top tiers reflects the mix of technologies: a 1&nbsp;Gbps FTTP service delivers; a 1&nbsp;Gbps FTTN service cannot.</p>
+        <h3>Higher plan tiers deliver more &mdash; but with far greater spread</h3>
+        <p>Entry-level 25&nbsp;Mbps plans are consistent: almost everyone gets close to 25&nbsp;Mbps. But 500&nbsp;Mbps and 1&nbsp;Gbps plans show wide boxes &mdash; some households hit 900+&nbsp;Mbps while others struggle below 200&nbsp;Mbps. The spread at the top tiers reflects the technology mix: a 1&nbsp;Gbps FTTP service delivers; a 1&nbsp;Gbps FTTN service cannot.</p>
         <div class="callout">
           <strong>Top-tier plans vary wildly</strong>
-          <span>1 Gbps boxes span 200–950 Mbps because FTTN copper limits performance regardless of plan</span>
+          <span>1 Gbps boxes span 200&ndash;950 Mbps because FTTN copper limits performance regardless of plan</span>
         </div>
       </div>
       <div class="pure-u-1 pure-u-lg-2-3">
@@ -609,56 +572,42 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════
-       PART 5: TRENDS & GEOGRAPHY
-  ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ PART 5 ══════════════════════════════════════════════════════════
+       TRENDS & GEOGRAPHY
+  ═══════════════════════════════════════════════════════════════════════ -->
   <div class="part-header">
     <div class="part-label">Part 5</div>
     <h2>Trends &amp; Geography</h2>
   </div>
 
-  <!-- Chart 15: Slope graph -->
+  <!-- Charts 15 + 16: slope + bump side by side -->
   <div class="card">
     <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Fibre over-delivers; copper under-delivers</h3>
-        <p>Each line traces one technology from its <strong>mean advertised speed</strong> to its <strong>mean actual busy-hour speed</strong>. Lines sloping <em>upward</em> mean the technology over-delivers; lines sloping <em>downward</em> mean it falls short. FTTP and HFC both rise — providers under-promise and over-deliver. FTTN and Satellite slope down, confirming systematic underperformance.</p>
-        <div class="callout">
-          <strong>FTTP &amp; HFC rise</strong>
-          <span>Fibre technologies average above their advertised tier; copper technologies fall below</span>
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-right:20px">
+        <div class="col-head">
+          <h3>Fibre over-delivers; copper under-delivers</h3>
+          <p>Each line traces one technology from its <strong>mean advertised speed</strong> to its <strong>mean actual busy-hour speed</strong>. Lines sloping <em>upward</em> mean the technology over-delivers on average; lines sloping <em>downward</em> mean it falls short. FTTP and HFC both rise &mdash; providers under-promise and over-deliver. FTTN and Satellite slope down, confirming systematic underperformance.</p>
         </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
         <div id="chart15" class="vc"></div>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
-    </div>
-  </div>
-
-  <!-- Chart 16: Bump chart -->
-  <div class="card">
-    <div class="pure-g">
-      <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>State speed rankings have reshuffled since 2021</h3>
-        <p>The bump chart tracks each state's <strong>speed rank</strong> (1&nbsp;= fastest) from Ookla&nbsp;2021 to ACCC&nbsp;2025. The ACT and VIC have held the top spots, but the states in the middle pack have shuffled significantly as FTTP upgrades roll out unevenly. States that adopted fibre early climbed; those still relying on copper fell behind.</p>
-        <div class="callout">
-          <strong>Lines crossing = rank change</strong>
-          <span>Crossing lines reveal which states benefited most from NBN upgrades between 2021 and 2025</span>
+      <div class="pure-u-1 pure-u-lg-1-2" style="padding-left:20px">
+        <div class="col-head">
+          <h3>State speed rankings reshuffled since 2021</h3>
+          <p>The bump chart tracks each state's <strong>speed rank</strong> (1&nbsp;= fastest) from Ookla&nbsp;2021 to ACCC&nbsp;2025. The ACT and VIC have held the top spots, but the middle pack has shuffled significantly as FTTP upgrades roll out unevenly. States that adopted fibre early climbed; those still relying on copper fell behind. Hover a line to see exact speeds.</p>
         </div>
-      </div>
-      <div class="pure-u-1 pure-u-lg-2-3">
         <div id="chart16" class="vc"></div>
         <span class="src">Sources: Ookla Speedtest Open Data 2021 Q3 &nbsp;&middot;&nbsp; ACCC MBA Report 28, 2025</span>
       </div>
     </div>
   </div>
 
-  <!-- Chart 17: Proportional symbol map -->
+  <!-- Chart 17: narrative left + map right -->
   <div class="card">
     <div class="pure-g">
       <div class="pure-u-1 pure-u-lg-1-3 narr">
-        <h3>Testing is concentrated in the south-east — and speed follows</h3>
-        <p>Each circle is centred on a state's geographic centre. <strong>Circle size</strong> shows the number of Ookla Speedtest measurements from that state in Q3 2021; <strong>colour</strong> shows average download speed (darker = faster). NSW and VIC dominate testing volume, while the <strong>ACT&nbsp;— with far fewer tests — records the fastest average</strong>, reflecting its higher share of fibre connections and tech-savvy residents.</p>
+        <h3>Testing is concentrated in the south-east &mdash; and speed follows</h3>
+        <p>Each circle is centred on a state's geographic centre. <strong>Circle size</strong> shows the number of Ookla Speedtest measurements from that state in Q3 2021; <strong>colour</strong> shows average download speed (darker = faster). NSW and VIC dominate testing volume, while the <strong>ACT &mdash; with far fewer tests &mdash; records the fastest average</strong>, reflecting its higher share of fibre connections and tech-savvy residents.</p>
         <div class="callout">
           <strong>ACT leads</strong>
           <span>Smallest circle, darkest blue: fewest tests but highest average speed at 61&nbsp;Mbps</span>
@@ -672,6 +621,8 @@
   </div>
 
 </div><!-- end .wrap -->
+
+
 
 <!-- ═══ FOOTER ══════════════════════════════════════════════════════════ -->
 <footer class="site-footer">

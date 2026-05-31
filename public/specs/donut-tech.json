@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Distribution of NBN technology types in the ACCC MBA panel, 2025.",
-  "width": 340,
-  "height": 280,
+  "width": "container",
+  "height": 260,
   "data": {
     "url": "data/mba-tech.json"
   },
@@ -42,8 +42,9 @@
       },
       "legend": {
         "title": "Technology",
-        "orient": "right",
-        "labelFontSize": 11
+        "orient": "bottom",
+        "labelFontSize": 11,
+        "columns": 2
       }
     },
     "order": {

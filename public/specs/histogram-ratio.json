@@ -1,56 +1,77 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Histogram of speed achievement ratio (actual ÷ advertised) across all monitored NBN services, MBA Report 28.",
+  "description": "Delivery performance categories by NBN technology — share of services exceeding, meeting, slightly under, or significantly under their advertised plan speed. MBA Report 28, 2025.",
   "width": "container",
   "height": 300,
-  "layer": [
+  "data": {"url": "data/mba-scatter.json"},
+  "transform": [
     {
-      "data": {"url": "data/mba-scatter.json"},
-      "transform": [
-        {"calculate": "datum.actual_mbps / datum.tier_mbps", "as": "ratio"},
-        {"filter": "datum.ratio < 3"}
-      ],
-      "mark": {"type": "bar", "opacity": 0.85},
-      "encoding": {
-        "x": {
-          "bin": {"maxbins": 30},
-          "field": "ratio",
-          "type": "quantitative",
-          "title": "Actual ÷ Advertised Speed  (ratio)"
-        },
-        "y": {
-          "aggregate": "count",
-          "type": "quantitative",
-          "title": "Number of services"
-        },
-        "color": {
-          "condition": {"test": "datum['bin_maxbins_30_ratio_end'] <= 1.0", "value": "#e65100"},
-          "value": "#1565c0"
-        },
-        "tooltip": [
-          {"bin": true, "field": "ratio", "type": "quantitative", "title": "Ratio range", "format": ".2f"},
-          {"aggregate": "count", "type": "quantitative", "title": "Services"}
-        ]
-      }
+      "calculate": "datum.actual_mbps / datum.tier_mbps",
+      "as": "ratio"
     },
     {
-      "data": {"values": [{"x": 1.0}]},
-      "mark": {"type": "rule", "color": "#e65100", "strokeDash": [6, 3], "strokeWidth": 2},
-      "encoding": {
-        "x": {"field": "x", "type": "quantitative"}
-      }
-    },
-    {
-      "data": {"values": [{"x": 1.0, "label": "100% of advertised"}]},
-      "mark": {"type": "text", "align": "left", "dx": 6, "dy": -8, "fontSize": 11, "color": "#e65100", "fontStyle": "italic"},
-      "encoding": {
-        "x": {"field": "x", "type": "quantitative"},
-        "y": {"value": 0},
-        "text": {"field": "label"}
-      }
+      "calculate": "datum.ratio >= 1.1 ? 'Exceeds plan (110%+)' : datum.ratio >= 0.9 ? 'Meets plan (90–110%)' : datum.ratio >= 0.75 ? 'Slightly under (75–90%)' : 'Under-delivers (<75%)'",
+      "as": "category"
     }
   ],
-  "resolve": {"scale": {"x": "shared"}},
+  "mark": {"type": "bar"},
+  "encoding": {
+    "x": {
+      "field": "technology",
+      "type": "nominal",
+      "title": "NBN Technology",
+      "sort": [
+        "Fibre to the Premises",
+        "Hybrid Fibre Coaxial",
+        "Fibre to the Curb",
+        "Fibre to the Node",
+        "Fixed Wireless",
+        "Satellite"
+      ],
+      "axis": {"labelAngle": -20, "labelLimit": 160}
+    },
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "stack": "normalize",
+      "title": "Share of services (%)",
+      "axis": {"format": "%"}
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Exceeds plan (110%+)",
+          "Meets plan (90–110%)",
+          "Slightly under (75–90%)",
+          "Under-delivers (<75%)"
+        ],
+        "range": ["#1565c0", "#64b5f6", "#f57c00", "#bf360c"]
+      },
+      "legend": {
+        "title": "Delivery vs advertised plan",
+        "orient": "bottom",
+        "columns": 2,
+        "labelFontSize": 11
+      }
+    },
+    "order": {
+      "field": "category",
+      "type": "nominal",
+      "sort": [
+        "Exceeds plan (110%+)",
+        "Meets plan (90–110%)",
+        "Slightly under (75–90%)",
+        "Under-delivers (<75%)"
+      ]
+    },
+    "tooltip": [
+      {"field": "technology", "type": "nominal", "title": "Technology"},
+      {"field": "category", "type": "nominal", "title": "Delivery performance"},
+      {"aggregate": "count", "type": "quantitative", "title": "Services in group"}
+    ]
+  },
   "config": {
     "background": "transparent",
     "view": {"stroke": "transparent"}

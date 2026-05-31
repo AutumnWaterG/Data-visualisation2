@@ -99,7 +99,7 @@
           },
           "legend": {
             "title": "Technology",
-            "orient": "bottom-right"
+            "orient": "bottom"
           }
         },
         "tooltip": [

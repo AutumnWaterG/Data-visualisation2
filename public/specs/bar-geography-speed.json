@@ -60,7 +60,7 @@
       },
       "legend": {
         "title": "Technology",
-        "orient": "top-right"
+        "orient": "bottom"
       }
     },
     "tooltip": [

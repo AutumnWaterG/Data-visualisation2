@@ -42,7 +42,7 @@
             "domain": ["Fibre to the Premises", "Hybrid Fibre Coaxial", "Fibre to the Curb", "Fibre to the Node", "Fixed Wireless", "Satellite"],
             "range": ["#1565c0", "#1976d2", "#42a5f5", "#78909c", "#f57c00", "#bf360c"]
           },
-          "legend": {"title": "Technology", "orient": "right"}
+          "legend": null
         },
         "detail": {"field": "technology"},
         "tooltip": [
