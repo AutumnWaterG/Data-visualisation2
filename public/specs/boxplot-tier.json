@@ -1,41 +1,71 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Box-and-whisker plot of actual busy-hour speeds grouped by advertised plan tier, MBA Report 28.",
+  "description": "Range bar chart showing min–max actual speed per plan tier with median marker, MBA Report 28.",
   "width": "container",
-  "height": 320,
+  "height": 340,
   "data": {"url": "data/mba-scatter.json"},
-  "mark": {
-    "type": "boxplot",
-    "extent": 1.5,
-    "outliers": {"size": 18, "opacity": 0.2},
-    "median": {"color": "white", "strokeWidth": 2},
-    "box": {"size": 38}
-  },
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "min",    "field": "actual_mbps", "as": "speed_min"},
+        {"op": "max",    "field": "actual_mbps", "as": "speed_max"},
+        {"op": "median", "field": "actual_mbps", "as": "speed_median"},
+        {"op": "min",    "field": "tier_mbps",   "as": "tier_mbps"}
+      ],
+      "groupby": ["tier_label"]
+    }
+  ],
   "encoding": {
     "x": {
       "field": "tier_label",
-      "type": "nominal",
+      "type": "ordinal",
       "title": "Advertised plan tier",
       "sort": {"field": "tier_mbps", "op": "min", "order": "ascending"},
-      "axis": {"labelAngle": -30, "labelLimit": 130}
-    },
-    "y": {
-      "field": "actual_mbps",
-      "type": "quantitative",
-      "title": "Actual busy-hour speed (Mbps)",
-      "scale": {"zero": false}
-    },
-    "color": {
-      "field": "tier_mbps",
-      "type": "quantitative",
-      "scale": {"scheme": "blues", "reverse": false},
-      "legend": null
-    },
-    "tooltip": [
-      {"field": "tier_label", "type": "nominal", "title": "Plan tier"},
-      {"field": "actual_mbps", "type": "quantitative", "title": "Actual speed (Mbps)", "format": ".1f"}
-    ]
+      "axis": {
+        "labelAngle": -45,
+        "labelAlign": "right",
+        "labelLimit": 240,
+        "labelFontSize": 11,
+        "labelPadding": 10
+      }
+    }
   },
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadius": 3, "opacity": 0.85},
+      "encoding": {
+        "y": {
+          "field": "speed_min",
+          "type": "quantitative",
+          "title": "Actual busy-hour speed (Mbps)",
+          "scale": {"zero": false, "nice": true}
+        },
+        "y2": {"field": "speed_max"},
+        "color": {
+          "condition": {"test": "datum.tier_mbps >= 500", "value": "#f57c00"},
+          "value": "#1565c0"
+        },
+        "tooltip": [
+          {"field": "tier_label",   "type": "nominal",      "title": "Plan tier"},
+          {"field": "speed_min",    "type": "quantitative", "title": "Min (Mbps)",    "format": ".0f"},
+          {"field": "speed_median", "type": "quantitative", "title": "Median (Mbps)", "format": ".0f"},
+          {"field": "speed_max",    "type": "quantitative", "title": "Max (Mbps)",    "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "tick",
+        "color": "white",
+        "thickness": 3,
+        "size": 20,
+        "opacity": 1
+      },
+      "encoding": {
+        "y": {"field": "speed_median", "type": "quantitative"}
+      }
+    }
+  ],
   "config": {
     "background": "transparent",
     "view": {"stroke": "transparent"}

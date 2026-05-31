@@ -17,7 +17,7 @@
       "field": "technology",
       "type": "nominal",
       "title": null,
-      "sort": {"field": "speed", "op": "max", "order": "descending"},
+      "sort": ["Fibre to the Premises", "Hybrid Fibre Coaxial", "Fibre to the Curb", "Fibre to the Node", "Fixed Wireless", "Satellite"],
       "axis": {"labelFontSize": 11}
     },
     "color": {

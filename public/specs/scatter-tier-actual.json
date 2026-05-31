@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Advertised tier speed vs actual busy hour speed, coloured by technology, MBA 2025.",
+  "description": "Advertised tier speed vs actual busy hour speed, coloured by technology with log-space jitter, MBA 2025.",
   "width": "container",
-  "height": 380,
+  "height": 400,
   "layer": [
     {
       "data": {
@@ -18,10 +18,10 @@
       },
       "mark": {
         "type": "line",
-        "color": "#888",
+        "color": "#999",
         "strokeDash": [6, 4],
         "strokeWidth": 1.5,
-        "opacity": 0.7
+        "opacity": 0.6
       },
       "encoding": {
         "x": {"field": "x", "type": "quantitative"},
@@ -29,16 +29,8 @@
       }
     },
     {
-      "data": {
-        "values": [{"x": 600, "y": 650, "label": "Perfect delivery (y = x)"}]
-      },
-      "mark": {
-        "type": "text",
-        "angle": 38,
-        "fontSize": 10,
-        "color": "#666",
-        "fontStyle": "italic"
-      },
+      "data": {"values": [{"x": 50, "y": 290, "label": "↑ Faster than advertised"}]},
+      "mark": {"type": "text", "fontSize": 10.5, "fontStyle": "italic", "fontWeight": 500, "color": "#1565c0", "align": "left"},
       "encoding": {
         "x": {"field": "x", "type": "quantitative"},
         "y": {"field": "y", "type": "quantitative"},
@@ -46,35 +38,42 @@
       }
     },
     {
-      "data": {
-        "url": "data/mba-scatter.json"
-      },
+      "data": {"values": [{"x": 280, "y": 60, "label": "↓ Slower than advertised"}]},
+      "mark": {"type": "text", "fontSize": 10.5, "fontStyle": "italic", "fontWeight": 500, "color": "#bf360c", "align": "left"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"url": "data/mba-scatter.json"},
+      "transform": [
+        {
+          "calculate": "datum.tier_mbps * pow(10, ((datum.actual_mbps % 97) / 97 - 0.5) * 0.18)",
+          "as": "tier_jittered"
+        }
+      ],
       "mark": {
         "type": "point",
-        "opacity": 0.35,
-        "size": 40,
-        "filled": true
+        "opacity": 0.28,
+        "size": 18,
+        "filled": true,
+        "strokeWidth": 0
       },
       "encoding": {
         "x": {
-          "field": "tier_mbps",
+          "field": "tier_jittered",
           "type": "quantitative",
           "title": "Advertised Tier Speed (Mbps)",
-          "scale": {
-            "type": "log",
-            "base": 10,
-            "nice": true
-          }
+          "scale": {"type": "log", "base": 10, "nice": true},
+          "axis": {"values": [25, 50, 100, 250, 500, 1000]}
         },
         "y": {
           "field": "actual_mbps",
           "type": "quantitative",
           "title": "Actual Busy Hour Speed (Mbps)",
-          "scale": {
-            "type": "log",
-            "base": 10,
-            "nice": true
-          }
+          "scale": {"type": "log", "base": 10, "nice": true}
         },
         "color": {
           "field": "technology",
@@ -99,50 +98,56 @@
           },
           "legend": {
             "title": "Technology",
-            "orient": "bottom"
+            "orient": "bottom",
+            "columns": 3,
+            "symbolSize": 180,
+            "symbolOpacity": 1,
+            "labelFontSize": 10,
+            "titleFontSize": 11
           }
         },
         "tooltip": [
-          {
-            "field": "technology",
-            "type": "nominal",
-            "title": "Technology"
-          },
-          {
-            "field": "tier_label",
-            "type": "nominal",
-            "title": "Plan tier"
-          },
-          {
-            "field": "tier_mbps",
-            "type": "quantitative",
-            "title": "Advertised (Mbps)"
-          },
-          {
-            "field": "actual_mbps",
-            "type": "quantitative",
-            "title": "Actual (Mbps)",
-            "format": ".1f"
-          },
-          {
-            "field": "underperforming",
-            "type": "nominal",
-            "title": "Underperforming?"
-          }
+          {"field": "technology",    "type": "nominal",      "title": "Technology"},
+          {"field": "tier_label",    "type": "nominal",      "title": "Plan tier"},
+          {"field": "tier_mbps",     "type": "quantitative", "title": "Advertised (Mbps)"},
+          {"field": "actual_mbps",   "type": "quantitative", "title": "Actual (Mbps)",  "format": ".1f"},
+          {"field": "underperforming","type": "nominal",     "title": "Underperforming?"}
         ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 350, "y": 700, "label": "FTTP and HFC often exceed advertised speed"}]},
+      "mark": {"type": "text", "fontSize": 9.5, "fontStyle": "italic", "color": "#1565c0", "align": "right"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 80, "y": 22, "label": "FTTN shows a copper ceiling"}]},
+      "mark": {"type": "text", "fontSize": 9.5, "fontStyle": "italic", "color": "#546e7a", "align": "left"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 22, "y": 88, "label": "Fixed Wireless and Satellite are more inconsistent"}]},
+      "mark": {"type": "text", "fontSize": 9.5, "fontStyle": "italic", "color": "#4b5563", "align": "left"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
       }
     }
   ],
   "resolve": {
-    "scale": {
-      "x": "shared",
-      "y": "shared"
-    }
+    "scale": {"x": "shared", "y": "shared"}
   },
   "config": {
     "background": "transparent",
-    "view": {
-      "stroke": "transparent"
-    }
+    "view": {"stroke": "transparent"}
   }
 }

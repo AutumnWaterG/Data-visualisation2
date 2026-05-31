@@ -563,6 +563,7 @@
           <p>Each cell shows the average download speed for a geography&ndash;technology combination. <strong>Darker blue = faster</strong>. FTTP stays dark across all geographies; Satellite and FTTN are consistently pale. Rural areas gain almost nothing by upgrading from FTTN to Fixed Wireless &mdash; only full fibre moves the needle.</p>
         </div>
         <div id="chart12" class="vc"></div>
+        <p style="font-size:11px;color:#64748b;margin:4px 0 0;font-style:italic;">White cells mean no monitored data available for that combination, not zero speed.</p>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
       <div class="pure-u-1 pure-u-lg-5-12" style="padding-left:12px">
@@ -583,12 +584,13 @@
         <h3>Higher plan tiers deliver more &mdash; but with far greater spread</h3>
         <p>Entry-level 25&nbsp;Mbps plans are consistent: almost everyone gets close to 25&nbsp;Mbps. But 500&nbsp;Mbps and 1&nbsp;Gbps plans show wide boxes &mdash; some households hit 900+&nbsp;Mbps while others struggle below 200&nbsp;Mbps. The spread at the top tiers reflects the technology mix: a 1&nbsp;Gbps FTTP service delivers; a 1&nbsp;Gbps FTTN service cannot.</p>
         <div class="callout">
-          <strong>Top-tier plans vary wildly</strong>
-          <span>1 Gbps boxes span 200&ndash;950 Mbps because FTTN copper limits performance regardless of plan</span>
+          <strong>Top-tier plans vary widely</strong>
+          <span>The same advertised tier can deliver very different busy-hour speeds depending on access technology.</span>
         </div>
       </div>
       <div class="pure-u-1 pure-u-lg-2-3">
         <div id="chart14" class="vc"></div>
+        <p style="font-size:11px;color:#64748b;margin:4px 0 0;font-style:italic;">Box = middle 50% of services; dots = individual services.</p>
         <span class="src">Source: ACCC MBA Report 28, 2025 (CC BY 2.5 AU)</span>
       </div>
     </div>
@@ -667,14 +669,14 @@
         </p>
         <hr>
         <h4>AI tools acknowledgement</h4>
-        <p>Claude AI (Anthropic) assisted with Python data-aggregation scripts, Vega-Lite specification design, and page HTML/CSS layout. All analytical judgements, chart selection, narrative text, and design decisions were made by the author.</p>
+        <p>Generative AI tools were used to support technical development tasks, including Vega-Lite specification drafting, and HTML/CSS layout refinement. All outputs were reviewed, edited, and validated by the author. The final analytical judgements, chart selection, narrative framing, visual design decisions, and written explanations were completed by the author.</p>
       </div>
       <div class="pure-u-1 pure-u-md-1-2">
         <h4>Data sources</h4>
         <p>
           <a href="https://registry.opendata.aws/speedtest-global-performance/" target="_blank">Ookla Speedtest Open Data</a>
           &mdash; Fixed broadband, Australia, Q3 2021. Licensed CC BY 4.0.<br><br>
-          <a href="https://www.accc.gov.au/consumers/internet-and-phone/broadband-performance-program" target="_blank">ACCC Measuring Broadband Australia</a>
+          <a href="https://www.accc.gov.au/regulated-infrastructure/communications/monitoring-reporting/measuring-broadband-australia-program" target="_blank">ACCC Measuring Broadband Australia</a>
           &mdash; Report 28, March 2025. Licensed CC BY 2.5 AU.<br><br>
           <a href="https://github.com/rowanhogan/australian-states" target="_blank">Australian States GeoJSON</a>
           &mdash; rowanhogan, GitHub. Used for state boundary maps.<br><br>

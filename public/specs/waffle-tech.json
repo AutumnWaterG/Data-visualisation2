@@ -44,7 +44,7 @@
           "Satellite (6%)",
           "Fibre to the Curb (3%)"
         ],
-        "range": ["#1565c0", "#1976d2", "#78909c", "#f57c00", "#bf360c", "#42a5f5"]
+        "range": ["#1565c0", "#00897b", "#78909c", "#f57c00", "#c62828", "#7b1fa2"]
       },
       "legend": {
         "title": "Technology (share)",

@@ -2,9 +2,17 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Ookla 2021 Q3 fixed broadband speeds binned to 0.5° grid tiles.",
   "width": "container",
-  "height": 540,
-  "projection": {"type": "mercator"},
+  "height": 600,
+  "projection": {
+    "type": "mercator",
+    "scale": 840,
+    "center": [133.5, -28.5]
+  },
   "layer": [
+    {
+      "data": {"sphere": true},
+      "mark": {"type": "geoshape", "fill": "#f4f4f4", "stroke": null}
+    },
     {
       "data": {
         "url": "data/australian-states.json",
@@ -20,6 +28,7 @@
     {
       "data": {"url": "data/ookla-grid.json"},
       "transform": [
+        {"filter": "datum.lon >= 112 && datum.lon <= 154 && datum.lat >= -44 && datum.lat <= -10"},
         {"calculate": "datum.lon - 0.25", "as": "lon_w"},
         {"calculate": "datum.lon + 0.25", "as": "lon_e"},
         {"calculate": "datum.lat - 0.25", "as": "lat_s"},
@@ -27,7 +36,7 @@
       ],
       "mark": {"type": "rect", "opacity": 0.9},
       "encoding": {
-        "longitude": {"field": "lon_w", "type": "quantitative"},
+        "longitude":  {"field": "lon_w", "type": "quantitative"},
         "longitude2": {"field": "lon_e"},
         "latitude":   {"field": "lat_n", "type": "quantitative"},
         "latitude2":  {"field": "lat_s"},
@@ -42,11 +51,11 @@
           "legend": {
             "orient": "right",
             "gradientLength": 220,
-            "gradientThickness": 14,
+            "gradientThickness": 16,
             "title": "Avg Speed (Mbps)",
-            "titleFontSize": 11,
+            "titleFontSize": 13,
             "titleFontWeight": 600,
-            "labelFontSize": 10,
+            "labelFontSize": 12,
             "values": [0, 50, 150, 400],
             "labelExpr": "datum.value === 0 ? 'Slower (0)' : datum.value >= 400 ? 'Faster (400+)' : datum.label + ' Mbps'"
           }
@@ -72,7 +81,7 @@
       "mark": {
         "type": "point",
         "filled": true,
-        "size": 60,
+        "size": 70,
         "color": "white",
         "stroke": "#1a2332",
         "strokeWidth": 1.8
@@ -86,18 +95,85 @@
     {
       "data": {
         "values": [
-          {"city": "Sydney",    "lon": 151.2, "lat": -33.9},
+          {"city": "Sydney",   "lon": 151.2, "lat": -33.9},
+          {"city": "Brisbane", "lon": 153.0, "lat": -27.5}
+        ]
+      },
+      "mark": {
+        "type": "text", "align": "right", "baseline": "middle",
+        "dx": -16, "dy": -14, "fontSize": 14, "fontWeight": "bold",
+        "color": "white", "stroke": "white", "strokeWidth": 5
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"city": "Sydney",   "lon": 151.2, "lat": -33.9},
+          {"city": "Brisbane", "lon": 153.0, "lat": -27.5}
+        ]
+      },
+      "mark": {
+        "type": "text", "align": "right", "baseline": "middle",
+        "dx": -16, "dy": -14, "fontSize": 14, "fontWeight": "bold",
+        "color": "#111111"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+
+    {
+      "data": {
+        "values": [
           {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
-          {"city": "Brisbane",  "lon": 153.0, "lat": -27.5},
           {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
         ]
       },
       "mark": {
-        "type": "text",
-        "align": "right",
-        "dx": -14, "dy": -6,
-        "fontSize": 14, "fontWeight": 700,
-        "color": "white", "stroke": "white", "strokeWidth": 18
+        "type": "text", "align": "left", "baseline": "middle",
+        "dx": 14, "dy": 18, "fontSize": 14, "fontWeight": "bold",
+        "color": "white", "stroke": "white", "strokeWidth": 5
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
+          {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
+        ]
+      },
+      "mark": {
+        "type": "text", "align": "left", "baseline": "middle",
+        "dx": 14, "dy": 18, "fontSize": 14, "fontWeight": "bold",
+        "color": "#111111"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude":  {"field": "lat", "type": "quantitative"},
+        "text":      {"field": "city", "type": "nominal"}
+      }
+    },
+
+    {
+      "data": {
+        "values": [{"city": "Perth", "lon": 115.9, "lat": -31.9}]
+      },
+      "mark": {
+        "type": "text", "align": "left", "baseline": "middle",
+        "dx": 14, "dy": -14, "fontSize": 14, "fontWeight": "bold",
+        "color": "white", "stroke": "white", "strokeWidth": 5
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -110,11 +186,9 @@
         "values": [{"city": "Perth", "lon": 115.9, "lat": -31.9}]
       },
       "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 14, "dy": -6,
-        "fontSize": 14, "fontWeight": 700,
-        "color": "white", "stroke": "white", "strokeWidth": 18
+        "type": "text", "align": "left", "baseline": "middle",
+        "dx": 14, "dy": -14, "fontSize": 14, "fontWeight": "bold",
+        "color": "#111111"
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -122,15 +196,15 @@
         "text":      {"field": "city", "type": "nominal"}
       }
     },
+
     {
       "data": {
         "values": [{"note": "Grey areas = limited Speedtest coverage", "lon": 129.5, "lat": -24.5}]
       },
       "mark": {
-        "type": "text",
-        "align": "center",
-        "fontSize": 11, "fontWeight": 600,
-        "color": "white", "stroke": "white", "strokeWidth": 10
+        "type": "text", "align": "center", "baseline": "middle",
+        "fontSize": 12, "fontWeight": 600, "fontStyle": "italic",
+        "color": "white", "stroke": "white", "strokeWidth": 5
       },
       "encoding": {
         "longitude": {"field": "lon", "type": "quantitative"},
@@ -138,55 +212,13 @@
         "text":      {"field": "note", "type": "nominal"}
       }
     },
-
-    {
-      "data": {
-        "values": [
-          {"city": "Sydney",    "lon": 151.2, "lat": -33.9},
-          {"city": "Melbourne", "lon": 144.9, "lat": -37.8},
-          {"city": "Brisbane",  "lon": 153.0, "lat": -27.5},
-          {"city": "Adelaide",  "lon": 138.6, "lat": -34.9}
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "dx": -14, "dy": -6,
-        "fontSize": 14, "fontWeight": 700,
-        "color": "#0f172a"
-      },
-      "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude":  {"field": "lat", "type": "quantitative"},
-        "text":      {"field": "city", "type": "nominal"}
-      }
-    },
-    {
-      "data": {
-        "values": [{"city": "Perth", "lon": 115.9, "lat": -31.9}]
-      },
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 14, "dy": -6,
-        "fontSize": 14, "fontWeight": 700,
-        "color": "#0f172a"
-      },
-      "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude":  {"field": "lat", "type": "quantitative"},
-        "text":      {"field": "city", "type": "nominal"}
-      }
-    },
     {
       "data": {
         "values": [{"note": "Grey areas = limited Speedtest coverage", "lon": 129.5, "lat": -24.5}]
       },
       "mark": {
-        "type": "text",
-        "align": "center",
-        "fontSize": 11, "fontWeight": 600,
-        "fontStyle": "italic",
+        "type": "text", "align": "center", "baseline": "middle",
+        "fontSize": 12, "fontWeight": 600, "fontStyle": "italic",
         "color": "#1e3a5f"
       },
       "encoding": {
